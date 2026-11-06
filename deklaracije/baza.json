@@ -1,0 +1,1065 @@
+{
+ "verzija": "2026-11-06T01:19:57Z",
+ "proizvodi": [
+  {
+   "s": "100100",
+   "n": "Premium cream",
+   "u": "50 ml",
+   "p": "",
+   "a": "Anti-age krema za lice",
+   "k": "Ujutru i uveče naneti na lice i vrat posle seruma.",
+   "v": "Izbegavati kontakt sa očima."
+  },
+  {
+   "s": "100101",
+   "n": "Premium serum",
+   "u": "30 ml",
+   "p": "",
+   "a": "Anti-age serum za lice",
+   "k": "Naneti na očišćeno lice i vrat pre kreme.",
+   "v": "Izbegavati kontakt sa očima."
+  },
+  {
+   "s": "101335",
+   "n": "Ampule \"Power Lifting Eliksir, Puluan & Neuropeptid\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu kože lica",
+   "k": "Naneti sadržaj ampule na čistu kožu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101339",
+   "n": "Ampule \"Night Repair, Mikroalge & Astaxanthin\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za noćnu negu kože",
+   "k": "Uveče naneti sadržaj ampule na čistu kožu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101340",
+   "n": "Ampule \"Red-Less Polifenol&CICA\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Umirujuće ampule za lice",
+   "k": "Naneti na čistu kožu, zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101342",
+   "n": "Ampule Fruit Peel \"AHA4\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule sa voćnim kiselinama",
+   "k": "Koristiti prema protokolu proizvođača.",
+   "v": "Kiseline; izbegavati oči; danju SPF. Proveriti original."
+  },
+  {
+   "s": "101343",
+   "n": "Ampule Colagen-Boost \"Aminokiselene&Tripeptide\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za anti-age negu",
+   "k": "Naneti na čistu kožu, zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101345",
+   "n": "Hyaluron Liftampulle",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za hidrataciju kože",
+   "k": "Naneti sadržaj ampule na čistu kožu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101346",
+   "n": "Ampule \"Beaty Eyes Hyaluron & Firming Peptide\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu oko očiju",
+   "k": "Naneti na područje oko očiju po uputstvu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101348",
+   "n": "Ampulle Clear Skin „Zink & Calm Komplex“",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu kože lica",
+   "k": "Sadržaj ampule utapkati na čistu kožu; zatim naneti negu.",
+   "v": "Ne u oči. Ne otvarati golom rukom; odmah potrošiti."
+  },
+  {
+   "s": "101349",
+   "n": "Ampule Multi Repair \"Bakuchiol & Squalane\"",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu kože lica",
+   "k": "Naneti na čistu kožu, zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "101404",
+   "n": "aesthetic world NGF Matrix Cream Rich",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hranljiva krema za negu lica",
+   "k": "Naneti na čistu kožu lica i vrata.",
+   "v": ""
+  },
+  {
+   "s": "101429K",
+   "n": "aesthetic world Recovery Earth Mask",
+   "u": "250 ml",
+   "p": "Nemačka",
+   "a": "Maska za negu lica",
+   "k": "Naneti na čisto lice; posle 5–15 min isprati.",
+   "v": ""
+  },
+  {
+   "s": "101430",
+   "n": "aesthetic world Clearing Foam",
+   "u": "190 ml",
+   "p": "Nemačka",
+   "a": "Pena za čišćenje kože lica",
+   "k": "Naneti na kožu i kružno umasirati; isprati mlakom vodom.",
+   "v": ""
+  },
+  {
+   "s": "101430K",
+   "n": "Aesthetic world Clearing Foam",
+   "u": "190 ml",
+   "p": "Nemačka",
+   "a": "Pena za čišćenje kože lica",
+   "k": "Naneti na kožu i kružno umasirati; isprati mlakom vodom.",
+   "v": ""
+  },
+  {
+   "s": "101431",
+   "n": "Aesthetic world Clearing Foam",
+   "u": "190 ml",
+   "p": "Nemačka",
+   "a": "Pena za čišćenje kože lica",
+   "k": "Naneti na kožu i kružno umasirati; isprati mlakom vodom.",
+   "v": ""
+  },
+  {
+   "s": "101433",
+   "n": "aesthetic world Niacin Transform Serum",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Naneti na očišćenu kožu, zatim kremu.",
+   "v": ""
+  },
+  {
+   "s": "101491",
+   "n": "aesthetic world Eye Make-up Remover",
+   "u": "100 ml",
+   "p": "Nemačka",
+   "a": "Sredstvo za uklanjanje šminke oko očiju",
+   "k": "Naneti na tupfer i nežno ukloniti šminku.",
+   "v": "Izbegavati direktan kontakt sa očima."
+  },
+  {
+   "s": "101493",
+   "n": "aesthetic world TriCollagen Booster + Vitamin C Ampoules",
+   "u": "50 ml + 3 × 2 ml",
+   "p": "Nemačka",
+   "a": "Set seruma i ampula za lice",
+   "k": "Koristiti serum i ampule prema originalnom uputstvu.",
+   "v": "Proveriti redosled i upozorenja za ampule."
+  },
+  {
+   "s": "101494",
+   "n": "aesthetic world TriCollagen Serum + Cell Booster Ampoules",
+   "u": "50 ml + 3 × 2 ml",
+   "p": "Nemačka",
+   "a": "Set seruma i ampula za lice",
+   "k": "Koristiti prema uputstvu za oba preparata.",
+   "v": "Proveriti redosled i upozorenja za ampule."
+  },
+  {
+   "s": "101496",
+   "n": "aesthetic world TriHyal Age Resist Leave-on Mask",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Maska za negu kože lica",
+   "k": "Naneti na očišćenu kožu; ostaviti prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "101497",
+   "n": "aesthetic world TriHyal Age Resist Eye Cream",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Krema za predeo oko očiju",
+   "k": "Naneti nežno na kožu oko očiju.",
+   "v": "Izbegavati direktan kontakt sa očima."
+  },
+  {
+   "s": "101498",
+   "n": "aesthetic world TriHyal Age Resist Cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Ujutru i uveče naneti na očišćeno lice i vrat.",
+   "v": ""
+  },
+  {
+   "s": "101501",
+   "n": "MicroSilver BG™ Face & Body Spray",
+   "u": "100 ml",
+   "p": "Nemačka",
+   "a": "Sprej za negu kože lica i tela",
+   "k": "Naneti na kožu prema originalnom uputstvu.",
+   "v": "Ne prskati direktno u oči."
+  },
+  {
+   "s": "101502",
+   "n": "MicroSilver BG™ Face Cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu lica",
+   "k": "Ujutru i uveče naneti na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "101502K",
+   "n": "MicroSilver BG™ Face Cream",
+   "u": "200 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu lica",
+   "k": "Ujutru i uveče naneti na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "101503",
+   "n": "MicroSilver BG™ Peeling",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Piling za lice",
+   "k": "Na čistu kožu 1–2 puta nedeljno; nakon 10 min isprati hladnom vodom.",
+   "v": ""
+  },
+  {
+   "s": "101503K",
+   "n": "MicroSilver BG™ Peeling",
+   "u": "200 ml",
+   "p": "Nemačka",
+   "a": "Piling za lice",
+   "k": "Na čistu kožu 1–2 puta nedeljno; nakon 10 min isprati hladnom vodom.",
+   "v": ""
+  },
+  {
+   "s": "101508",
+   "n": "MicroSilver BG™ Cream Mask",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krem-maska za lice",
+   "k": "Naneti na čistu kožu; ukloniti prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "101508K",
+   "n": "MicroSilver BG™ Cream Mask",
+   "u": "200 ml",
+   "p": "Nemačka",
+   "a": "Krem-maska za negu lica",
+   "k": "1–2 puta nedeljno na čistu kožu; posle 15–20 min ostatak umasirati.",
+   "v": ""
+  },
+  {
+   "s": "101510",
+   "n": "MicroSilver BG™ Face Cream Soft",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu lica",
+   "k": "Ujutru i uveče naneti na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "101510K",
+   "n": "MicroSilver BG™ Face Cream Soft",
+   "u": "200 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu lica",
+   "k": "Ujutru i uveče naneti na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "101517",
+   "n": "MicroSilver BG™ Face Wash",
+   "u": "100 ml",
+   "p": "Nemačka",
+   "a": "Sredstvo za pranje lica",
+   "k": "Naneti na vlažnu kožu i isprati vodom.",
+   "v": ""
+  },
+  {
+   "s": "101517K",
+   "n": "MicroSilver BG™ Face Wash",
+   "u": "500 ml",
+   "p": "Nemačka",
+   "a": "Preparat za čišćenje kože lica",
+   "k": "Naneti na vlažnu kožu, nežno utrljati, pa isprati.",
+   "v": ""
+  },
+  {
+   "s": "101650",
+   "n": "Retinal Serum Level 1",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Anti-age serum sa retinalom",
+   "k": "Uveče na suvu, čistu kožu, 2–3 puta nedeljno.",
+   "v": "Ne u trudnoći/dojenju; danju koristiti SPF."
+  },
+  {
+   "s": "101651",
+   "n": "Retinal Serum Level 2",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Anti-age serum sa retinalom",
+   "k": "Uveče na čistu, suvu kožu, prema uputstvu.",
+   "v": "Ne u trudnoći/dojenju; danju koristiti SPF."
+  },
+  {
+   "s": "101652",
+   "n": "Retinal Cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože sa retinalom",
+   "k": "Uveče naneti na čistu kožu, prema uputstvu.",
+   "v": "Ne u trudnoći/dojenju; danju koristiti SPF."
+  },
+  {
+   "s": "101833",
+   "n": "aesthetic world Anti-Aging UV Protect SPF 50",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Zaštitni preparat za lice SPF 50",
+   "k": "Naneti pre izlaganja suncu; obnavljati zaštitu.",
+   "v": "Izbegavati prekomerno izlaganje suncu."
+  },
+  {
+   "s": "101835",
+   "n": "aesthetic world Power Hyal 12",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Hidratantni serum za lice",
+   "k": "Naneti na čistu kožu lica, zatim kremu.",
+   "v": ""
+  },
+  {
+   "s": "108018",
+   "n": "Couperose Reducing Mask",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Umirujuća maska za lice",
+   "k": "Naneti na očišćenu kožu; ukloniti prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "108019",
+   "n": "Couperose Reducing Cream",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože sklone crvenilu",
+   "k": "Naneti na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "108020",
+   "n": "Couperose Reducing Concentrate",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Koncentrat za negu kože sklone crvenilu",
+   "k": "Naneti na očišćenu kožu, zatim kremu.",
+   "v": ""
+  },
+  {
+   "s": "108021",
+   "n": "Couperose Reducing Cover & Care Cream SPF 50",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Tonirana nega lica sa SPF 50",
+   "k": "Naneti ravnomerno pre izlaganja suncu; obnavljati zaštitu.",
+   "v": ""
+  },
+  {
+   "s": "109023",
+   "n": "SUN Drops SPF 50",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Fluid za zaštitu od sunca, SPF 50",
+   "k": "Naneti nekoliko minuta posle dnevne nege; obnavljati zaštitu.",
+   "v": "Ne mešati s kremom/šminkom jer smanjuje SPF."
+  },
+  {
+   "s": "110330",
+   "n": "classic Hyaluron Creme",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hidratantna krema za lice",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "120101",
+   "n": "classic PLUS DiHyal Hydro Cremegel",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hidratantni krem-gel za lice",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "120102",
+   "n": "classic PLUS DiHyal Soft Creme",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "120102K",
+   "n": "classic PLUS DiHyal Soft Creme",
+   "u": "150 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "120103",
+   "n": "classic PLUS DiHyal Structure Creme",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": "Sadrži vitamin A – uzeti u obzir dnevni unos."
+  },
+  {
+   "s": "120103K",
+   "n": "classic PLUS DiHyal Structure Creme",
+   "u": "150 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": "Sadrži vitamin A – uzeti u obzir dnevni unos."
+  },
+  {
+   "s": "120104",
+   "n": "classic PLUS DiHyal Sensitive Fluid",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Fluid za negu osetljive kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "120104K",
+   "n": "classic PLUS DiHyal Sensitive Fluid",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Fluid za negu osetljive kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "120105",
+   "n": "classic PLUS DiHyal Eye Correction Serum",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu područja oko očiju",
+   "k": "Ujutru i uveče nežno utapkati oko očiju.",
+   "v": "Ne dozvoliti kontakt proizvoda s očima."
+  },
+  {
+   "s": "120106",
+   "n": "classic PLUS DiHyal Effect Gel",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Gel za negu kože lica",
+   "k": "Ujutru i uveče na čistu kožu; zatim naneti kremu.",
+   "v": ""
+  },
+  {
+   "s": "123020",
+   "n": "aesthetic pharm Booster transdermal+",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Koncentrat za negu kože",
+   "k": "Koristiti prema uputstvu proizvođača.",
+   "v": ""
+  },
+  {
+   "s": "123021",
+   "n": "aesthetic pharm concentrate anti-age+",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Koncentrat za anti-age negu kože",
+   "k": "Naneti na čistu kožu prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "123022",
+   "n": "aesthetic pharm concentrate firming+",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Koncentrat za učvršćivanje kože",
+   "k": "Naneti na čistu kožu prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "123030",
+   "n": "aesthetic pharm Cream anti-age+",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Naneti na čistu kožu lica i vrata.",
+   "v": ""
+  },
+  {
+   "s": "123032",
+   "n": "aesthetic pharm Cream clear skin+",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu problematične kože",
+   "k": "Naneti na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "123034",
+   "n": "aesthetic pharm mask vitality+",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Maska za negu kože lica",
+   "k": "Naneti na čistu kožu; ukloniti prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "123034K",
+   "n": "aesthetic pharm mask vitality +",
+   "u": "250 ml",
+   "p": "Nemačka",
+   "a": "Krem-maska za negu zrele kože",
+   "k": "1–2 puta nedeljno; nakon 20 min ukloniti ili ostaviti.",
+   "v": "Sadrži vitamin A – uzeti u obzir dnevni unos."
+  },
+  {
+   "s": "123318",
+   "n": "fruit appeel SkinSolution AHA & BHA Peeling Liquid",
+   "u": "100 ml",
+   "p": "Nemačka",
+   "a": "Piling-tečnost za negu kože lica",
+   "k": "Uveče naneti tupferom na čistu kožu; ne ispirati.",
+   "v": "Izbegavati područje oko očiju."
+  },
+  {
+   "s": "123320K",
+   "n": "fruit appeel PROFESSIONAL 10% Moisturizing",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Profesionalni tretman pilinga lica",
+   "k": "Samo stručno osoblje, prema CNC protokolu.",
+   "v": "Neutralizacija prema profesionalnom protokolu."
+  },
+  {
+   "s": "123321K",
+   "n": "fruit appeel PROFESSIONAL 20% Protect & Calm",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Profesionalni tretman pilinga lica",
+   "k": "Samo stručno osoblje, prema CNC protokolu.",
+   "v": "Neutralizacija prema profesionalnom protokolu."
+  },
+  {
+   "s": "123322K",
+   "n": "fruit appeel PROFESSIONAL 40% Firming",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Profesionalni tretman pilinga lica",
+   "k": "Samo stručno osoblje, prema CNC protokolu.",
+   "v": "Neutralizacija prema profesionalnom protokolu."
+  },
+  {
+   "s": "123323K",
+   "n": "fruit appeel PROFESSIONAL 60% Lift & Brightening",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Profesionalni tretman pilinga lica",
+   "k": "Samo stručno osoblje, prema CNC protokolu.",
+   "v": "Neutralizacija prema profesionalnom protokolu."
+  },
+  {
+   "s": "125041",
+   "n": "edition lift essence",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Naneti serum na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "125041K",
+   "n": "edition lift essence (Kabi)",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Naneti serum na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "125050",
+   "n": "edition 4.0",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Ujutru i uveče naneti na očišćeno lice i vrat.",
+   "v": ""
+  },
+  {
+   "s": "125050K",
+   "n": "edition 4.0",
+   "u": "100 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Ujutru i uveče naneti na očišćeno lice i vrat.",
+   "v": ""
+  },
+  {
+   "s": "137002",
+   "n": "MED HYAL Cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hidratantna krema za lice",
+   "k": "Naneti na čistu kožu lica i vrata.",
+   "v": ""
+  },
+  {
+   "s": "137003",
+   "n": "MED HYAL Set",
+   "u": "30 ml + 50 ml",
+   "p": "Nemačka",
+   "a": "Set: MED HYAL serum i krema",
+   "k": "Naneti serum pa kremu, na očišćenu kožu.",
+   "v": ""
+  },
+  {
+   "s": "137004",
+   "n": "MED HYAL clear & refine",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Ujutru ili uveče na čistu kožu; zatim krema.",
+   "v": ""
+  },
+  {
+   "s": "137005",
+   "n": "MED HYAL collagen manager",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Ujutru ili uveče na čistu kožu; zatim krema.",
+   "v": ""
+  },
+  {
+   "s": "137006",
+   "n": "MED HYAL glow & brightening",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Ujutru ili uveče na čistu kožu; zatim krema.",
+   "v": ""
+  },
+  {
+   "s": "137009",
+   "n": "MED HYAL exosome",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Naneti na očišćenu kožu, zatim kremu.",
+   "v": ""
+  },
+  {
+   "s": "144010",
+   "n": "moments of pearls stay fresh",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Naneti na čistu kožu lica i vrata.",
+   "v": ""
+  },
+  {
+   "s": "144010K",
+   "n": "moments of pearls stay fresh",
+   "u": "150 ml",
+   "p": "Nemačka",
+   "a": "Hidratantna krema za lice",
+   "k": "Ujutru i uveče naneti na čisto lice i vrat.",
+   "v": ""
+  },
+  {
+   "s": "144012",
+   "n": "moments of pearls eye like",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu područja oko očiju",
+   "k": "Ujutru i uveče naneti oko očiju.",
+   "v": "Izbegavati kontakt sa očima."
+  },
+  {
+   "s": "160001",
+   "n": "skin2derm cleansing tonic",
+   "u": "200 ml",
+   "p": "Nemačka",
+   "a": "Tonik za negu kože lica",
+   "k": "Naneti tupferom nakon čišćenja lica.",
+   "v": ""
+  },
+  {
+   "s": "301012",
+   "n": "Hand & Nail Care",
+   "u": "125 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu ruku i noktiju",
+   "k": "Po potrebi više puta dnevno umasirati u čiste ruke.",
+   "v": ""
+  },
+  {
+   "s": "303333",
+   "n": "BB Cream Blemish Beauty Balm Medium",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Tonirana krema za lice, srednja nijansa",
+   "k": "Naneti ravnomerno na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "305070",
+   "n": "clear it cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Naneti na očišćenu kožu.",
+   "v": ""
+  },
+  {
+   "s": "305078",
+   "n": "Bio-Cellulose Mask mit Hyaluron & Aloe Vera",
+   "u": "1 maska",
+   "p": "Južna Koreja",
+   "a": "Maska za lice sa hijaluronom i aloe verom",
+   "k": "Masku staviti na čisto lice; skinuti posle 15–20 min.",
+   "v": "Ostatak seruma utapkati u kožu."
+  },
+  {
+   "s": "305080",
+   "n": "Slow Aging Mask mit Adenosine & Ginseng",
+   "u": "1 maska",
+   "p": "Južna Koreja",
+   "a": "Maska za lice sa adenozinom i ženšenom",
+   "k": "Položiti na čisto lice; ukloniti prema uputstvu na pakovanju.",
+   "v": ""
+  },
+  {
+   "s": "305081",
+   "n": "Peel & Glow Mask mit PHA & Centella Asiatica",
+   "u": "1 maska",
+   "p": "Južna Koreja",
+   "a": "Maska za lice sa PHA i centelom",
+   "k": "Položiti na čisto lice; ukloniti prema uputstvu na pakovanju.",
+   "v": ""
+  },
+  {
+   "s": "330001",
+   "n": "MicroSilver BG™ Fuß Creme-Schaum",
+   "u": "150 ml",
+   "p": "Nemačka",
+   "a": "Pena-krema za negu stopala",
+   "k": "Naneti na čistu, suvu kožu stopala.",
+   "v": ""
+  },
+  {
+   "s": "330003K",
+   "n": "Creme-Schaum Hornhaut und Schrunden",
+   "u": "300 ml",
+   "p": "Nemačka",
+   "a": "Pena-krema za zadebljalu kožu stopala",
+   "k": "Naneti na čistu, suvu kožu stopala.",
+   "v": ""
+  },
+  {
+   "s": "R0003",
+   "n": "aesthetic world Facial Tonic",
+   "u": "200 ml",
+   "p": "Nemačka",
+   "a": "Tonik za negu kože lica",
+   "k": "Tupferom blago prebrisati očišćenu kožu.",
+   "v": ""
+  },
+  {
+   "s": "R0010",
+   "n": "MicroSilver BG Fuß Cream-Schaum",
+   "u": "300 ml",
+   "p": "Nemačka",
+   "a": "Pena-krema za negu stopala",
+   "k": "Naneti na čistu, suvu kožu stopala.",
+   "v": ""
+  },
+  {
+   "s": "R0013",
+   "n": "Aesthetic world Niacin transform serum",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Naneti na očišćenu kožu, zatim kremu.",
+   "v": ""
+  },
+  {
+   "s": "R0014",
+   "n": "Aesthetic world Niacin transform serum",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Naneti na očišćenu kožu, zatim kremu.",
+   "v": ""
+  },
+  {
+   "s": "R0016",
+   "n": "Aesthetic world TriHyal Age Resist Cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Ujutru i uveče naneti na očišćeno lice i vrat.",
+   "v": ""
+  },
+  {
+   "s": "R0022",
+   "n": "aesthetic pharm Cream anti-age+",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Naneti na čistu kožu lica i vrata.",
+   "v": ""
+  },
+  {
+   "s": "R0024",
+   "n": "Aestetic Pharm Cream moisture+",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hidratantna krema za lice",
+   "k": "Ujutru i uveče naneti na čistu kožu lica i vrata.",
+   "v": "Izbegavati kontakt sa očima."
+  },
+  {
+   "s": "R0027",
+   "n": "Bio-Cellulose Mask mit Hyaluron & Aloe Vera (display 20 kom)",
+   "u": "20 maski",
+   "p": "Južna Koreja",
+   "a": "Maska za lice sa hijaluronom i aloe verom",
+   "k": "Masku staviti na čisto lice; skinuti posle 15–20 min.",
+   "v": "Ostatak seruma utapkati u kožu."
+  },
+  {
+   "s": "R0032",
+   "n": "Ampoule Multivitamin (B, C, E)",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Vitaminske ampule za negu kože",
+   "k": "Naneti na čistu kožu; zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "R0119",
+   "n": "Hyaluron aloe vera Feuchtigkeitsampulle",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za hidrataciju kože",
+   "k": "Naneti sadržaj ampule na čistu kožu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "R0122",
+   "n": "Bio - Repairampulle",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu zrele kože",
+   "k": "Naneti na čistu kožu, zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "R0123",
+   "n": "Detox Ampulle",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu kože lica",
+   "k": "Naneti na čistu kožu, zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "R0124",
+   "n": "Aesthetic World Anti - aging Sun Fluid SPF 50",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Zaštitni preparat za lice SPF 50",
+   "k": "Naneti pre izlaganja suncu; obnavljati zaštitu.",
+   "v": "Izbegavati prekomerno izlaganje suncu."
+  },
+  {
+   "s": "R0125",
+   "n": "Aesthetic world Clearing Foam",
+   "u": "300 ml",
+   "p": "Nemačka",
+   "a": "Pena za čišćenje kože lica",
+   "k": "Naneti na kožu i kružno umasirati; isprati mlakom vodom.",
+   "v": ""
+  },
+  {
+   "s": "R0135",
+   "n": "Classic Hyaluron creme",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hidratantna krema za lice",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "R0136",
+   "n": "Classic plus DiHyal soft creme",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Krema za negu kože lica",
+   "k": "Ujutru i uveče naneti na očišćenu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "R0137",
+   "n": "classic PLUS DiHyal Eye Correction Serum",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu područja oko očiju",
+   "k": "Ujutru i uveče nežno utapkati oko očiju.",
+   "v": "Ne dozvoliti kontakt proizvoda s očima."
+  },
+  {
+   "s": "R0139",
+   "n": "aesthetic pharm concentrate clear skin+",
+   "u": "15 ml",
+   "p": "Nemačka",
+   "a": "Koncentrat za problematičnu kožu",
+   "k": "Naneti na čistu kožu prema uputstvu.",
+   "v": ""
+  },
+  {
+   "s": "R0140",
+   "n": "Purifying Concentrate",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Ampule za negu masne i nečiste kože",
+   "k": "Naneti na čistu kožu, zatim kremu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "R0141",
+   "n": "Moisturizing Concentrate",
+   "u": "10 × 2 ml",
+   "p": "Nemačka",
+   "a": "Hidratantne ampule za lice",
+   "k": "Naneti sadržaj ampule na čistu kožu.",
+   "v": "Ne u oči; ne otvarati golim rukama; odmah potrošiti."
+  },
+  {
+   "s": "R0142",
+   "n": "Edition 3.5",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Anti-age krema za lice",
+   "k": "Ujutru i uveče naneti na čistu kožu lica i vrata.",
+   "v": "Izbegavati kontakt sa očima."
+  },
+  {
+   "s": "R0143",
+   "n": "MED HYAL cream",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Hidratantna krema za lice",
+   "k": "Naneti na čistu kožu lica i vrata.",
+   "v": ""
+  },
+  {
+   "s": "R0145",
+   "n": "MED HYAL clear & refine",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Ujutru ili uveče na čistu kožu; zatim krema.",
+   "v": ""
+  },
+  {
+   "s": "R0146",
+   "n": "MED HYAL collagen manager",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Ujutru ili uveče na čistu kožu; zatim krema.",
+   "v": ""
+  },
+  {
+   "s": "R0147",
+   "n": "MED HYAL glow & brightening",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Serum za negu kože lica",
+   "k": "Ujutru ili uveče na čistu kožu; zatim krema.",
+   "v": ""
+  },
+  {
+   "s": "R0150",
+   "n": "BB Cream Blemish Beauty Balm Light",
+   "u": "50 ml",
+   "p": "Nemačka",
+   "a": "Tonirana krema za lice, svetla nijansa",
+   "k": "Naneti ravnomerno na čistu kožu lica.",
+   "v": ""
+  },
+  {
+   "s": "R0152",
+   "n": "Creme-Schaum \"Trockene und rissige Haut\"",
+   "u": "300 ml",
+   "p": "Nemačka",
+   "a": "Pena-krema za zadebljalu kožu stopala",
+   "k": "Naneti na čistu, suvu kožu stopala.",
+   "v": ""
+  },
+  {
+   "s": "R0154",
+   "n": "UNG. KONCENTRAT",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Kozmetički koncentrat — proveriti namenu",
+   "k": "Prema originalnoj ambalaži.",
+   "v": ""
+  },
+  {
+   "s": "R0155",
+   "n": "UNG. TINKTURA",
+   "u": "30 ml",
+   "p": "Nemačka",
+   "a": "Kozmetički preparat — proveriti namenu",
+   "k": "Prema originalnoj ambalaži.",
+   "v": ""
+  }
+ ],
+ "uvoznici": [
+  "Floor 5\nBul. Z. Đinđića 123g, Beograd",
+  "GORDANA ŠARAC PR\nKOZMETIČKI CENTAR STUDIO 5 NOVI BEOGRAD\nOmladinskih brigada 7b, 11070 Novi Beograd"
+ ],
+ "proizvodjaci": [
+  "CNC cosmetic GmbH\nBruchstücker 9, 76661 Philippsburg"
+ ]
+}

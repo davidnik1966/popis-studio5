@@ -1,0 +1,656 @@
+<!doctype html><html lang="sr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deklaracije Studio 5</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Raspored: tri kolone na laptopu (postavke + izbor | lista za štampu | A4 pregled), neumorfni paneli na toplom kremu sajta Studio 5 */
+:root{
+  --bg:#eee8de;           /* krem pozadina, tamnija od sajta da senke rade */
+  --hi:#fffdf8;           /* svetla senka */
+  --lo:#cfc4b4;           /* tamna senka */
+  --ink:#1f1b18;          /* tekst sa sajta */
+  --muted:#6b5f55;
+  --accent:#8a6f5a;       /* bronza sa sajta */
+  --accent-ink:#6c5442;
+  --on-accent:#fffaf4;
+  --warn:#a35a14;
+  --line:rgba(31,27,24,.10);
+  --paper:#ffffff;
+  --paper-ink:#111;
+  --font-display:"Cormorant Garamond","Times New Roman",serif;
+  --font-body:Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --raise:7px 7px 16px var(--lo),-7px -7px 16px var(--hi);
+  --raise-s:4px 4px 9px var(--lo),-4px -4px 9px var(--hi);
+  --sink:inset 4px 4px 9px var(--lo),inset -4px -4px 9px var(--hi);
+  --sink-s:inset 2px 2px 5px var(--lo),inset -2px -2px 5px var(--hi);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#2b2420;--hi:#393029;--lo:#1a1512;--ink:#f1e9df;--muted:#b3a698;--accent:#a98a73;--accent-ink:#d3b9a2;--on-accent:#1f1b18;--warn:#e3a35c;--line:rgba(241,233,223,.12);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2b2420;--hi:#393029;--lo:#1a1512;--ink:#f1e9df;--muted:#b3a698;--accent:#a98a73;--accent-ink:#d3b9a2;--on-accent:#1f1b18;--warn:#e3a35c;--line:rgba(241,233,223,.12);color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 14px/1.45 var(--font-body);padding-block:18px 36px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1480px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+
+/* zaglavlje */
+header.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:0}
+.brand b{font:600 34px/1 var(--font-display);letter-spacing:.01em}
+.brand span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.pill{font-size:12px;color:var(--muted);padding:8px 14px;border-radius:999px;box-shadow:var(--sink-s);font-variant-numeric:tabular-nums}
+
+/* dugmad */
+.btn{border:0;background:var(--bg);border-radius:14px;padding:11px 18px;box-shadow:var(--raise-s);cursor:pointer;font-weight:500;display:inline-flex;gap:8px;align-items:center;justify-content:center;transition:box-shadow .15s,transform .15s}
+.btn:hover{box-shadow:6px 6px 12px var(--lo),-6px -6px 12px var(--hi)}
+.btn:active{box-shadow:var(--sink-s);transform:translateY(1px)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn.primary{background:var(--accent);color:var(--on-accent);font-weight:600;box-shadow:5px 5px 12px var(--lo),-5px -5px 12px var(--hi)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.primary:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.btn.small{padding:7px 12px;font-size:12.5px;border-radius:11px}
+.btn.danger{color:var(--warn)}
+.icon{width:36px;height:36px;padding:0;border-radius:12px}
+.menu{position:relative}
+.menu .pop{position:absolute;right:0;top:calc(100% + 10px);z-index:30;min-width:240px;background:var(--bg);border-radius:16px;padding:8px;box-shadow:var(--raise);display:flex;flex-direction:column;gap:2px}
+.menu .pop button{border:0;background:none;text-align:left;padding:10px 12px;border-radius:10px;cursor:pointer}
+.menu .pop button:hover{box-shadow:var(--sink-s)}
+
+/* raspored */
+main{display:grid;gap:22px;align-items:start;grid-template-columns:minmax(340px,400px) minmax(0,1fr) minmax(330px,420px)}
+.col{display:flex;flex-direction:column;gap:22px;min-width:0}
+.card{background:var(--bg);border-radius:24px;box-shadow:var(--raise);padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.card h2{margin:0;font:600 24px/1.1 var(--font-display);display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.card h2 small{font:400 12px var(--font-body);color:var(--muted);letter-spacing:.02em}
+.sticky{position:sticky;top:18px}
+@media (max-width:1240px){main{grid-template-columns:minmax(320px,400px) minmax(0,1fr)}.col.prev{grid-column:1/-1}.sticky{position:static}}
+@media (max-width:820px){main{grid-template-columns:minmax(0,1fr)}}
+
+/* polja */
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.field>label,.lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.in,textarea.in,select.in{width:100%;border:0;background:var(--bg);border-radius:14px;padding:12px 14px;box-shadow:var(--sink);outline-offset:3px;resize:vertical}
+textarea.in{line-height:1.5;min-height:74px}
+.in::placeholder{color:var(--muted);opacity:.8}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hint{font-size:12px;color:var(--muted);margin:0}
+details summary{cursor:pointer;font-size:12.5px;color:var(--accent-ink);font-weight:500}
+details[open] summary{margin-bottom:10px}
+
+/* pretraga */
+.search{position:relative}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.search .in{padding-left:42px;font-size:15px}
+.results{list-style:none;margin:0;padding:6px;max-height:300px;overflow:auto;border-radius:16px;box-shadow:var(--sink);display:flex;flex-direction:column;gap:2px;overscroll-behavior:contain}
+.results li{padding:9px 12px;border-radius:11px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:baseline}
+.results li:hover,.results li.on{background:var(--bg);box-shadow:var(--raise-s)}
+.results li.sel{outline:2px solid var(--accent);outline-offset:-2px}
+.results .nm{font-weight:500;overflow-wrap:anywhere}
+.results .meta{grid-column:1/-1;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.results .badge{font-size:11px;color:var(--warn);white-space:nowrap}
+.none{padding:18px;text-align:center;color:var(--muted)}
+
+/* izabrani proizvod */
+.picked{border-radius:18px;box-shadow:var(--sink);padding:16px;display:flex;flex-direction:column;gap:12px}
+.picked .t{font:600 19px/1.2 var(--font-display);overflow-wrap:anywhere}
+.picked .m{font-size:12px;color:var(--muted)}
+.qtyrow{display:flex;gap:10px;align-items:center}
+.stepper{display:inline-flex;align-items:center;gap:6px}
+.stepper button{width:34px;height:34px;border:0;border-radius:11px;background:var(--bg);box-shadow:var(--raise-s);cursor:pointer;font-size:18px;line-height:1}
+.stepper button:active{box-shadow:var(--sink-s)}
+.qty{width:70px;text-align:center;border:0;border-radius:11px;padding:8px 4px;background:var(--bg);box-shadow:var(--sink-s);font-weight:600;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+.qty::-webkit-outer-spin-button,.qty::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.qtyrow .grow{flex:1}
+
+/* lista za štampu */
+.queue{list-style:none;margin:0;padding:6px;border-radius:18px;box-shadow:var(--sink);display:flex;flex-direction:column;max-height:520px;overflow:auto}
+.qi{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 14px;align-items:center;padding:11px 12px;border-bottom:1px solid var(--line)}
+.qi:last-child{border-bottom:0}
+.qi .nm{font-weight:500;overflow-wrap:anywhere;line-height:1.3}
+.qi .meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.qi .warn{color:var(--warn)}
+.qi .edit{border:0;background:none;color:var(--accent-ink);cursor:pointer;padding:0;font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.empty{padding:28px 18px;text-align:center;color:var(--muted);display:flex;flex-direction:column;gap:12px;align-items:center}
+.empty b{font:600 20px var(--font-display);color:var(--ink)}
+.totals{display:flex;gap:10px;flex-wrap:wrap}
+.stat{flex:1 1 120px;border-radius:16px;box-shadow:var(--sink-s);padding:12px 14px}
+.stat b{display:block;font:600 28px/1 var(--font-display);font-variant-numeric:tabular-nums}
+.stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dl{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dl .btn.primary{flex:1 1 220px;padding:15px 20px;font-size:15px}
+
+/* mapa prve strane */
+.map{display:grid;grid-template-columns:repeat(4,26px);gap:5px}
+.map button{width:26px;height:20px;border:0;border-radius:6px;background:var(--bg);box-shadow:var(--raise-s);cursor:pointer;padding:0}
+.map button.skip{box-shadow:var(--sink-s);background:repeating-linear-gradient(45deg,transparent 0 3px,var(--line) 3px 5px)}
+.map button.use{background:var(--accent);box-shadow:var(--sink-s)}
+.maprow{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+
+/* A4 pregled */
+.pager{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pager span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.frame{border-radius:18px;box-shadow:var(--sink);padding:14px}
+.sheetwrap{width:100%;aspect-ratio:595.3/841.9;position:relative;overflow:hidden;border-radius:4px;background:var(--paper);box-shadow:0 2px 10px rgba(0,0,0,.22)}
+.sheet{position:absolute;left:0;top:0;width:595.3pt;height:841.9pt;transform-origin:0 0;background:var(--paper);color:var(--paper-ink);font-family:Arial,"Liberation Sans",Helvetica,sans-serif}
+.lb{position:absolute;overflow:hidden;height:99pt;line-height:1.149;color:#000}
+.lb div{white-space:normal}
+.lb.skipc{background:repeating-linear-gradient(45deg,transparent 0 5pt,#0000000d 5pt 6pt)}
+.sheetnote{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:500 22pt var(--font-display);color:#8a6f5a;text-align:center;padding:60pt}
+
+/* dijalozi */
+.scrim{position:fixed;inset:0;z-index:50;background:rgba(20,15,12,.45);display:flex;align-items:center;justify-content:center;padding:20px}
+.dlg{width:min(560px,100%);max-height:calc(100% - 20px);overflow:auto;background:var(--bg);border-radius:26px;box-shadow:var(--raise);padding:26px;display:flex;flex-direction:column;gap:14px}
+.dlg h3{margin:0;font:600 26px var(--font-display)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.two{grid-template-columns:1fr}}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:70;background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:min(560px,calc(100% - 32px));font-weight:500}
+.dropzone{outline:2px dashed var(--accent);outline-offset:-10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<body>
+<div class="wrap" id="app">
+  <header class="top">
+    <div class="brand"><b>Studio 5</b><span>Deklaracije · štampa nalepnica</span></div>
+    <div class="tools">
+      <span class="pill" id="dbPill">Baza: 0 proizvoda</span>
+      <button class="btn" id="impBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>Učitaj listu proizvoda</button>
+      <div class="menu">
+        <button class="btn icon" id="menuBtn" aria-label="Više opcija" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+        <div class="pop" id="menuPop" hidden>
+          <button id="mNew">Dodaj novi proizvod</button>
+          <button id="mTpl">Preuzmi Excel šablon liste</button>
+          <button id="mShare">Izvezi zajedničku bazu (baza.json)</button>
+          <button id="mExp">Izvezi bazu proizvoda (Excel)</button>
+          <button id="mReset">Vrati originalnu bazu</button>
+        </div>
+      </div>
+      <input type="file" id="file" accept=".xlsx,.xls,.csv,.pdf" hidden>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1: postavke + izbor -->
+    <div class="col">
+      <section class="card" aria-labelledby="h-find">
+        <h2 id="h-find">Izaberi proizvod <small id="resCount"></small></h2>
+        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="in" id="q" type="search" autocomplete="off" placeholder="Naziv ili šifra (taster / za brz skok)" aria-label="Pretraga proizvoda" role="combobox" aria-expanded="true" aria-controls="results"></div>
+        <div class="picked" id="picked" hidden>
+          <div><div class="t" id="pkName"></div><div class="m" id="pkMeta"></div></div>
+          <div class="qtyrow">
+            <span class="lbl">Nalepnica</span>
+            <div class="stepper"><button id="pkMinus" aria-label="Manje">−</button><input class="qty" id="pkQty" type="number" min="1" max="999" inputmode="numeric" aria-label="Broj nalepnica"><button id="pkPlus" aria-label="Više">+</button></div>
+            <span class="grow"></span>
+            <button class="btn primary" id="pkAdd" style="white-space:nowrap">Dodaj</button>
+          </div>
+          <p class="hint">Upiši broj i pritisni Enter.</p>
+        </div>
+        <ul class="results" id="results" role="listbox" aria-label="Proizvodi"></ul>
+      </section>
+      <section class="card" aria-labelledby="h-data">
+        <h2 id="h-data">Podaci na nalepnici</h2>
+        <div class="field">
+          <label for="manuf">Proizvođač</label>
+          <textarea class="in" id="manuf" rows="2" spellcheck="false"></textarea>
+          <div class="row"><select class="in" id="manufPre" style="flex:1 1 130px" aria-label="Sačuvani proizvođači"></select><button class="btn small" id="manufSave">Sačuvaj</button><button class="btn small danger" id="manufDel">Obriši</button></div>
+        </div>
+        <div class="field">
+          <label for="imp">Uvoznik</label>
+          <textarea class="in" id="imp" rows="3" spellcheck="false"></textarea>
+          <div class="row"><select class="in" id="impPre" style="flex:1 1 130px" aria-label="Sačuvani uvoznici"></select><button class="btn small" id="impSave">Sačuvaj</button><button class="btn small danger" id="impDel">Obriši</button></div>
+        </div>
+        <p class="hint">Prvi red ide odmah posle oznake, ostali redovi (adresa) sitnijim slovima. Ostalo pravi aplikacija iz baze proizvoda.</p>
+        <details><summary>Tekst na dnu nalepnice</summary><input class="in" id="foot" aria-label="Tekst na dnu nalepnice" spellcheck="false"></details>
+      </section>
+
+    </div>
+
+    <!-- 2: lista -->
+    <div class="col">
+      <section class="card" aria-labelledby="h-q">
+        <h2 id="h-q">Za štampu <small id="qSub"></small></h2>
+        <ul class="queue" id="queue" aria-label="Lista za štampu"></ul>
+        <div class="totals">
+          <div class="stat"><b id="sTot">0</b><span>nalepnica</span></div>
+          <div class="stat"><b id="sPg">0</b><span>A4 strana</span></div>
+          <div class="stat"><b id="sFree">0</b><span id="sFreeL">slobodno na zadnjoj</span></div>
+        </div>
+        <details id="mapBox"><summary>Počni od određenog polja (delimično iskorišćen list)</summary>
+          <div class="maprow"><div class="map" id="map" role="group" aria-label="Mapa prve strane"></div>
+          <p class="hint" style="flex:1 1 180px" id="mapHint"></p></div>
+        </details>
+        <div class="dl">
+          <button class="btn primary" id="dlBtn" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></svg>Preuzmi Word (.docx)</button>
+          <button class="btn" id="clrBtn">Očisti listu</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- 3: pregled -->
+    <div class="col prev">
+      <section class="card sticky" aria-labelledby="h-pv">
+        <h2 id="h-pv">Pregled A4 <small>orijentaciono</small></h2>
+        <div class="frame"><div class="sheetwrap" id="sheetWrap"><div class="sheet" id="sheet"></div></div></div>
+        <div class="pager"><button class="btn small" id="pgPrev" aria-label="Prethodna strana">‹ Nazad</button><span id="pgInfo">Strana 1 / 1</span><button class="btn small" id="pgNext" aria-label="Sledeća strana">Napred ›</button></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div class="scrim" id="edScrim" hidden>
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="edTitle">
+    <h3 id="edTitle">Proizvod</h3>
+    <div class="two"><div class="field"><label for="eS">Šifra</label><input class="in" id="eS" autocomplete="off"></div><div class="field"><label for="eU">Neto (npr. 50 ml)</label><input class="in" id="eU" autocomplete="off"></div></div>
+    <div class="field"><label for="eN">Naziv</label><input class="in" id="eN" autocomplete="off"></div>
+    <div class="two"><div class="field"><label for="eP">Poreklo</label><input class="in" id="eP" autocomplete="off"></div><div class="field"><label for="eA">Namena</label><input class="in" id="eA" autocomplete="off" placeholder="Npr. Krema za negu lica"></div></div>
+    <div class="field"><label for="eK">Upotreba</label><textarea class="in" id="eK" rows="2"></textarea></div>
+    <div class="field"><label for="eV">Važno (nije obavezno)</label><textarea class="in" id="eV" rows="2"></textarea></div>
+    <p class="hint" id="eMsg" role="alert" style="color:var(--warn)"></p>
+    <div class="row" style="justify-content:space-between"><button class="btn danger" id="eDel">Obriši proizvod</button><span class="row"><button class="btn" id="eCancel">Odustani</button><button class="btn primary" id="eSave">Sačuvaj</button></span></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+/* ===== Word (.docx) generator: A4, tabela 4 × 8, tačna geometrija iz Studio 5 šablona ===== */
+const GEO={
+  cols:[2608,2702,2698,2698],           // širina kolona (twips)
+  inner:[123.5,127.9,128.0,121.4],      // širina teksta u koloni (pt)
+  rowH:1980,                            // visina reda = 99 pt
+  marL:810,marR:390,                    // leva/desna margina (twips)
+  padTop:630,                           // gornja margina (twips), T+B = 878
+  perRow:4,perPage:32
+};
+const NS='xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
+const xe=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const FONT='<w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial" w:eastAsia="Arial"/>';
+function run(t,o){o=o||{};const sz=Math.round((o.sz||5.5)*2);
+  return `<w:r><w:rPr>${FONT}${o.b?"<w:b/><w:bCs/>":""}${o.color?`<w:color w:val="${o.color}"/>`:""}<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${xe(t)}</w:t></w:r>`}
+const para=runs=>`<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr>${runs}</w:p>`;
+const lines=v=>Array.isArray(v)?v:String(v||"").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+/* jedna nalepnica -> paragrafi (isti redosled i veličine slova kao u originalnom A4 PDF-u) */
+function labelXml(p,ctx){
+  const out=[];
+  out.push(para(run("#"+p.s,{b:1,sz:6,color:"222E3E"})));
+  out.push(para(run(p.n,{b:1,sz:6.5})));
+  if(p.a)out.push(para(run("Namena: ",{b:1})+run(p.a)));
+  if(p.u||p.p){const parts=[];if(p.u)parts.push(run("Neto: ",{b:1})+run(p.u));
+    if(p.p)parts.push(run((p.u?"  |  ":"")+"Poreklo: "+p.p));out.push(para(parts.join("")))}
+  const blk=(label,arr)=>{const L=lines(arr);if(!L.length)return;
+    out.push(para(run(label+" ",{b:1})+run(L[0])));
+    for(const x of L.slice(1))out.push(para(run(x,{sz:5})))};
+  blk("Proizvođač:",ctx.manufacturer);
+  blk("Uvoznik:",ctx.importer);
+  if(p.k)out.push(para(run("Upotreba: ",{b:1})+run(p.k)));
+  if(p.v)out.push(para(run("Važno: ",{b:1,sz:5})+run(p.v,{sz:5})));
+  if(ctx.footer)out.push(para(run(ctx.footer)));
+  return out.join("");
+}
+const EMPTY='<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/><w:rPr><w:sz w:val="10"/></w:rPr></w:pPr></w:p>';
+function documentXml(cells,ctx){
+  const G=GEO,total=cells.length,rows=Math.ceil(total/G.perRow);
+  const tw=G.cols.reduce((a,b)=>a+b,0);
+  let x=`<w:tbl><w:tblPr><w:tblW w:w="${tw}" w:type="dxa"/><w:tblInd w:w="0" w:type="dxa"/><w:tblLayout w:type="fixed"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar><w:tblLook w:val="0000"/></w:tblPr><w:tblGrid>${G.cols.map(c=>`<w:gridCol w:w="${c}"/>`).join("")}</w:tblGrid>`;
+  for(let r=0;r<rows;r++){
+    x+=`<w:tr><w:trPr><w:cantSplit/><w:trHeight w:val="${G.rowH}" w:hRule="exact"/></w:trPr>`;
+    for(let c=0;c<G.perRow;c++){
+      const cell=cells[r*G.perRow+c];
+      const rm=Math.max(0,Math.round(G.cols[c]-G.inner[c]*20));
+      x+=`<w:tc><w:tcPr><w:tcW w:w="${G.cols[c]}" w:type="dxa"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="${rm}" w:type="dxa"/></w:tcMar><w:vAlign w:val="top"/></w:tcPr>${cell?labelXml(cell,ctx):EMPTY}</w:tc>`;
+    }
+    x+="</w:tr>";
+  }
+  x+="</w:tbl>";
+  x+='<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/></w:rPr></w:pPr></w:p>';
+  const T=GEO.padTop,B=878-T;
+  x+=`<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="${T}" w:right="${G.marR}" w:bottom="${B}" w:left="${G.marL}" w:header="0" w:footer="0" w:gutter="0"/></w:sectPr>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${NS}><w:body>${x}</w:body></w:document>`;
+}
+const STYLES=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:docDefaults><w:rPrDefault><w:rPr>${FONT}<w:sz w:val="22"/><w:szCs w:val="22"/><w:lang w:val="sr-Latn-RS" w:eastAsia="sr-Latn-RS" w:bidi="ar-SA"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:before="0" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults><w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style><w:style w:type="table" w:default="1" w:styleId="TableNormal"><w:name w:val="Normal Table"/><w:uiPriority w:val="99"/><w:semiHidden/><w:tblPr><w:tblInd w:w="0" w:type="dxa"/><w:tblCellMar><w:top w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tblCellMar></w:tblPr></w:style></w:styles>`;
+const SETTINGS=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:settings xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:zoom w:percent="100"/><w:defaultTabStop w:val="720"/><w:characterSpacingControl w:val="doNotCompress"/><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>`;
+function buildFiles(cells,ctx,meta){
+  const now=new Date().toISOString().replace(/\.\d+Z$/,"Z");
+  return {
+    "[Content_Types].xml":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/><Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>`,
+    "_rels/.rels":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>`,
+    "word/_rels/document.xml.rels":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/></Relationships>`,
+    "word/document.xml":documentXml(cells,ctx),
+    "word/styles.xml":STYLES,"word/settings.xml":SETTINGS,
+    "docProps/core.xml":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${xe(meta.title)}</dc:title><dc:creator>Studio 5 Cosmetic Center</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified></cp:coreProperties>`,
+    "docProps/app.xml":`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>Deklaracije Studio 5</Application></Properties>`
+  };
+}
+async function buildDocx(JSZip,cells,ctx,meta){
+  const z=new JSZip(),f=buildFiles(cells,ctx,meta||{title:"Deklaracije"});
+  for(const k of Object.keys(f))z.file(k,f[k],{createFolders:false});
+  return z.generateAsync({type:"uint8array",compression:"DEFLATE",mimeType:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+}
+
+
+const BASE=[{"s":"100100","n":"Premium cream","u":"50 ml","p":"","a":"Anti-age krema za lice","k":"Ujutru i uveče naneti na lice i vrat posle seruma.","v":"Izbegavati kontakt sa očima."},{"s":"100101","n":"Premium serum","u":"30 ml","p":"","a":"Anti-age serum za lice","k":"Naneti na očišćeno lice i vrat pre kreme.","v":"Izbegavati kontakt sa očima."},{"s":"101335","n":"Ampule \"Power Lifting Eliksir, Puluan & Neuropeptid\"","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu kože lica","k":"Naneti sadržaj ampule na čistu kožu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101339","n":"Ampule \"Night Repair, Mikroalge & Astaxanthin\"","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za noćnu negu kože","k":"Uveče naneti sadržaj ampule na čistu kožu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101340","n":"Ampule \"Red-Less Polifenol&CICA\"","u":"10 × 2 ml","p":"Nemačka","a":"Umirujuće ampule za lice","k":"Naneti na čistu kožu, zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101342","n":"Ampule Fruit Peel \"AHA4\"","u":"10 × 2 ml","p":"Nemačka","a":"Ampule sa voćnim kiselinama","k":"Koristiti prema protokolu proizvođača.","v":"Kiseline; izbegavati oči; danju SPF. Proveriti original."},{"s":"101343","n":"Ampule Colagen-Boost \"Aminokiselene&Tripeptide\"","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za anti-age negu","k":"Naneti na čistu kožu, zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101345","n":"Hyaluron Liftampulle","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za hidrataciju kože","k":"Naneti sadržaj ampule na čistu kožu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101346","n":"Ampule \"Beaty Eyes Hyaluron & Firming Peptide\"","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu oko očiju","k":"Naneti na područje oko očiju po uputstvu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101348","n":"Ampulle Clear Skin „Zink & Calm Komplex“","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu kože lica","k":"Sadržaj ampule utapkati na čistu kožu; zatim naneti negu.","v":"Ne u oči. Ne otvarati golom rukom; odmah potrošiti."},{"s":"101349","n":"Ampule Multi Repair \"Bakuchiol & Squalane\"","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu kože lica","k":"Naneti na čistu kožu, zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"101404","n":"aesthetic world NGF Matrix Cream Rich","u":"50 ml","p":"Nemačka","a":"Hranljiva krema za negu lica","k":"Naneti na čistu kožu lica i vrata.","v":""},{"s":"101429K","n":"aesthetic world Recovery Earth Mask","u":"250 ml","p":"Nemačka","a":"Maska za negu lica","k":"Naneti na čisto lice; posle 5–15 min isprati.","v":""},{"s":"101430","n":"aesthetic world Clearing Foam","u":"190 ml","p":"Nemačka","a":"Pena za čišćenje kože lica","k":"Naneti na kožu i kružno umasirati; isprati mlakom vodom.","v":""},{"s":"101430K","n":"Aesthetic world Clearing Foam","u":"190 ml","p":"Nemačka","a":"Pena za čišćenje kože lica","k":"Naneti na kožu i kružno umasirati; isprati mlakom vodom.","v":""},{"s":"101431","n":"Aesthetic world Clearing Foam","u":"190 ml","p":"Nemačka","a":"Pena za čišćenje kože lica","k":"Naneti na kožu i kružno umasirati; isprati mlakom vodom.","v":""},{"s":"101433","n":"aesthetic world Niacin Transform Serum","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Naneti na očišćenu kožu, zatim kremu.","v":""},{"s":"101491","n":"aesthetic world Eye Make-up Remover","u":"100 ml","p":"Nemačka","a":"Sredstvo za uklanjanje šminke oko očiju","k":"Naneti na tupfer i nežno ukloniti šminku.","v":"Izbegavati direktan kontakt sa očima."},{"s":"101493","n":"aesthetic world TriCollagen Booster + Vitamin C Ampoules","u":"50 ml + 3 × 2 ml","p":"Nemačka","a":"Set seruma i ampula za lice","k":"Koristiti serum i ampule prema originalnom uputstvu.","v":"Proveriti redosled i upozorenja za ampule."},{"s":"101494","n":"aesthetic world TriCollagen Serum + Cell Booster Ampoules","u":"50 ml + 3 × 2 ml","p":"Nemačka","a":"Set seruma i ampula za lice","k":"Koristiti prema uputstvu za oba preparata.","v":"Proveriti redosled i upozorenja za ampule."},{"s":"101496","n":"aesthetic world TriHyal Age Resist Leave-on Mask","u":"50 ml","p":"Nemačka","a":"Maska za negu kože lica","k":"Naneti na očišćenu kožu; ostaviti prema uputstvu.","v":""},{"s":"101497","n":"aesthetic world TriHyal Age Resist Eye Cream","u":"15 ml","p":"Nemačka","a":"Krema za predeo oko očiju","k":"Naneti nežno na kožu oko očiju.","v":"Izbegavati direktan kontakt sa očima."},{"s":"101498","n":"aesthetic world TriHyal Age Resist Cream","u":"50 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Ujutru i uveče naneti na očišćeno lice i vrat.","v":""},{"s":"101501","n":"MicroSilver BG™ Face & Body Spray","u":"100 ml","p":"Nemačka","a":"Sprej za negu kože lica i tela","k":"Naneti na kožu prema originalnom uputstvu.","v":"Ne prskati direktno u oči."},{"s":"101502","n":"MicroSilver BG™ Face Cream","u":"50 ml","p":"Nemačka","a":"Krema za negu lica","k":"Ujutru i uveče naneti na čistu kožu lica.","v":""},{"s":"101502K","n":"MicroSilver BG™ Face Cream","u":"200 ml","p":"Nemačka","a":"Krema za negu lica","k":"Ujutru i uveče naneti na čistu kožu lica.","v":""},{"s":"101503","n":"MicroSilver BG™ Peeling","u":"50 ml","p":"Nemačka","a":"Piling za lice","k":"Na čistu kožu 1–2 puta nedeljno; nakon 10 min isprati hladnom vodom.","v":""},{"s":"101503K","n":"MicroSilver BG™ Peeling","u":"200 ml","p":"Nemačka","a":"Piling za lice","k":"Na čistu kožu 1–2 puta nedeljno; nakon 10 min isprati hladnom vodom.","v":""},{"s":"101508","n":"MicroSilver BG™ Cream Mask","u":"50 ml","p":"Nemačka","a":"Krem-maska za lice","k":"Naneti na čistu kožu; ukloniti prema uputstvu.","v":""},{"s":"101508K","n":"MicroSilver BG™ Cream Mask","u":"200 ml","p":"Nemačka","a":"Krem-maska za negu lica","k":"1–2 puta nedeljno na čistu kožu; posle 15–20 min ostatak umasirati.","v":""},{"s":"101510","n":"MicroSilver BG™ Face Cream Soft","u":"50 ml","p":"Nemačka","a":"Krema za negu lica","k":"Ujutru i uveče naneti na čistu kožu lica.","v":""},{"s":"101510K","n":"MicroSilver BG™ Face Cream Soft","u":"200 ml","p":"Nemačka","a":"Krema za negu lica","k":"Ujutru i uveče naneti na čistu kožu lica.","v":""},{"s":"101517","n":"MicroSilver BG™ Face Wash","u":"100 ml","p":"Nemačka","a":"Sredstvo za pranje lica","k":"Naneti na vlažnu kožu i isprati vodom.","v":""},{"s":"101517K","n":"MicroSilver BG™ Face Wash","u":"500 ml","p":"Nemačka","a":"Preparat za čišćenje kože lica","k":"Naneti na vlažnu kožu, nežno utrljati, pa isprati.","v":""},{"s":"101650","n":"Retinal Serum Level 1","u":"15 ml","p":"Nemačka","a":"Anti-age serum sa retinalom","k":"Uveče na suvu, čistu kožu, 2–3 puta nedeljno.","v":"Ne u trudnoći/dojenju; danju koristiti SPF."},{"s":"101651","n":"Retinal Serum Level 2","u":"15 ml","p":"Nemačka","a":"Anti-age serum sa retinalom","k":"Uveče na čistu, suvu kožu, prema uputstvu.","v":"Ne u trudnoći/dojenju; danju koristiti SPF."},{"s":"101652","n":"Retinal Cream","u":"50 ml","p":"Nemačka","a":"Krema za negu kože sa retinalom","k":"Uveče naneti na čistu kožu, prema uputstvu.","v":"Ne u trudnoći/dojenju; danju koristiti SPF."},{"s":"101833","n":"aesthetic world Anti-Aging UV Protect SPF 50","u":"30 ml","p":"Nemačka","a":"Zaštitni preparat za lice SPF 50","k":"Naneti pre izlaganja suncu; obnavljati zaštitu.","v":"Izbegavati prekomerno izlaganje suncu."},{"s":"101835","n":"aesthetic world Power Hyal 12","u":"30 ml","p":"Nemačka","a":"Hidratantni serum za lice","k":"Naneti na čistu kožu lica, zatim kremu.","v":""},{"s":"108018","n":"Couperose Reducing Mask","u":"50 ml","p":"Nemačka","a":"Umirujuća maska za lice","k":"Naneti na očišćenu kožu; ukloniti prema uputstvu.","v":""},{"s":"108019","n":"Couperose Reducing Cream","u":"30 ml","p":"Nemačka","a":"Krema za negu kože sklone crvenilu","k":"Naneti na čistu kožu lica.","v":""},{"s":"108020","n":"Couperose Reducing Concentrate","u":"15 ml","p":"Nemačka","a":"Koncentrat za negu kože sklone crvenilu","k":"Naneti na očišćenu kožu, zatim kremu.","v":""},{"s":"108021","n":"Couperose Reducing Cover & Care Cream SPF 50","u":"30 ml","p":"Nemačka","a":"Tonirana nega lica sa SPF 50","k":"Naneti ravnomerno pre izlaganja suncu; obnavljati zaštitu.","v":""},{"s":"109023","n":"SUN Drops SPF 50","u":"15 ml","p":"Nemačka","a":"Fluid za zaštitu od sunca, SPF 50","k":"Naneti nekoliko minuta posle dnevne nege; obnavljati zaštitu.","v":"Ne mešati s kremom/šminkom jer smanjuje SPF."},{"s":"110330","n":"classic Hyaluron Creme","u":"50 ml","p":"Nemačka","a":"Hidratantna krema za lice","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"120101","n":"classic PLUS DiHyal Hydro Cremegel","u":"50 ml","p":"Nemačka","a":"Hidratantni krem-gel za lice","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"120102","n":"classic PLUS DiHyal Soft Creme","u":"50 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"120102K","n":"classic PLUS DiHyal Soft Creme","u":"150 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"120103","n":"classic PLUS DiHyal Structure Creme","u":"50 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":"Sadrži vitamin A – uzeti u obzir dnevni unos."},{"s":"120103K","n":"classic PLUS DiHyal Structure Creme","u":"150 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":"Sadrži vitamin A – uzeti u obzir dnevni unos."},{"s":"120104","n":"classic PLUS DiHyal Sensitive Fluid","u":"30 ml","p":"Nemačka","a":"Fluid za negu osetljive kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"120104K","n":"classic PLUS DiHyal Sensitive Fluid","u":"50 ml","p":"Nemačka","a":"Fluid za negu osetljive kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"120105","n":"classic PLUS DiHyal Eye Correction Serum","u":"30 ml","p":"Nemačka","a":"Serum za negu područja oko očiju","k":"Ujutru i uveče nežno utapkati oko očiju.","v":"Ne dozvoliti kontakt proizvoda s očima."},{"s":"120106","n":"classic PLUS DiHyal Effect Gel","u":"30 ml","p":"Nemačka","a":"Gel za negu kože lica","k":"Ujutru i uveče na čistu kožu; zatim naneti kremu.","v":""},{"s":"123020","n":"aesthetic pharm Booster transdermal+","u":"30 ml","p":"Nemačka","a":"Koncentrat za negu kože","k":"Koristiti prema uputstvu proizvođača.","v":""},{"s":"123021","n":"aesthetic pharm concentrate anti-age+","u":"15 ml","p":"Nemačka","a":"Koncentrat za anti-age negu kože","k":"Naneti na čistu kožu prema uputstvu.","v":""},{"s":"123022","n":"aesthetic pharm concentrate firming+","u":"15 ml","p":"Nemačka","a":"Koncentrat za učvršćivanje kože","k":"Naneti na čistu kožu prema uputstvu.","v":""},{"s":"123030","n":"aesthetic pharm Cream anti-age+","u":"50 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Naneti na čistu kožu lica i vrata.","v":""},{"s":"123032","n":"aesthetic pharm Cream clear skin+","u":"50 ml","p":"Nemačka","a":"Krema za negu problematične kože","k":"Naneti na čistu kožu lica.","v":""},{"s":"123034","n":"aesthetic pharm mask vitality+","u":"50 ml","p":"Nemačka","a":"Maska za negu kože lica","k":"Naneti na čistu kožu; ukloniti prema uputstvu.","v":""},{"s":"123034K","n":"aesthetic pharm mask vitality +","u":"250 ml","p":"Nemačka","a":"Krem-maska za negu zrele kože","k":"1–2 puta nedeljno; nakon 20 min ukloniti ili ostaviti.","v":"Sadrži vitamin A – uzeti u obzir dnevni unos."},{"s":"123318","n":"fruit appeel SkinSolution AHA & BHA Peeling Liquid","u":"100 ml","p":"Nemačka","a":"Piling-tečnost za negu kože lica","k":"Uveče naneti tupferom na čistu kožu; ne ispirati.","v":"Izbegavati područje oko očiju."},{"s":"123320K","n":"fruit appeel PROFESSIONAL 10% Moisturizing","u":"30 ml","p":"Nemačka","a":"Profesionalni tretman pilinga lica","k":"Samo stručno osoblje, prema CNC protokolu.","v":"Neutralizacija prema profesionalnom protokolu."},{"s":"123321K","n":"fruit appeel PROFESSIONAL 20% Protect & Calm","u":"30 ml","p":"Nemačka","a":"Profesionalni tretman pilinga lica","k":"Samo stručno osoblje, prema CNC protokolu.","v":"Neutralizacija prema profesionalnom protokolu."},{"s":"123322K","n":"fruit appeel PROFESSIONAL 40% Firming","u":"30 ml","p":"Nemačka","a":"Profesionalni tretman pilinga lica","k":"Samo stručno osoblje, prema CNC protokolu.","v":"Neutralizacija prema profesionalnom protokolu."},{"s":"123323K","n":"fruit appeel PROFESSIONAL 60% Lift & Brightening","u":"30 ml","p":"Nemačka","a":"Profesionalni tretman pilinga lica","k":"Samo stručno osoblje, prema CNC protokolu.","v":"Neutralizacija prema profesionalnom protokolu."},{"s":"125041","n":"edition lift essence","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Naneti serum na očišćenu kožu lica.","v":""},{"s":"125041K","n":"edition lift essence (Kabi)","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Naneti serum na očišćenu kožu lica.","v":""},{"s":"125050","n":"edition 4.0","u":"50 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Ujutru i uveče naneti na očišćeno lice i vrat.","v":""},{"s":"125050K","n":"edition 4.0","u":"100 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Ujutru i uveče naneti na očišćeno lice i vrat.","v":""},{"s":"137002","n":"MED HYAL Cream","u":"50 ml","p":"Nemačka","a":"Hidratantna krema za lice","k":"Naneti na čistu kožu lica i vrata.","v":""},{"s":"137003","n":"MED HYAL Set","u":"30 ml + 50 ml","p":"Nemačka","a":"Set: MED HYAL serum i krema","k":"Naneti serum pa kremu, na očišćenu kožu.","v":""},{"s":"137004","n":"MED HYAL clear & refine","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Ujutru ili uveče na čistu kožu; zatim krema.","v":""},{"s":"137005","n":"MED HYAL collagen manager","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Ujutru ili uveče na čistu kožu; zatim krema.","v":""},{"s":"137006","n":"MED HYAL glow & brightening","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Ujutru ili uveče na čistu kožu; zatim krema.","v":""},{"s":"137009","n":"MED HYAL exosome","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Naneti na očišćenu kožu, zatim kremu.","v":""},{"s":"144010","n":"moments of pearls stay fresh","u":"50 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Naneti na čistu kožu lica i vrata.","v":""},{"s":"144010K","n":"moments of pearls stay fresh","u":"150 ml","p":"Nemačka","a":"Hidratantna krema za lice","k":"Ujutru i uveče naneti na čisto lice i vrat.","v":""},{"s":"144012","n":"moments of pearls eye like","u":"15 ml","p":"Nemačka","a":"Krema za negu područja oko očiju","k":"Ujutru i uveče naneti oko očiju.","v":"Izbegavati kontakt sa očima."},{"s":"160001","n":"skin2derm cleansing tonic","u":"200 ml","p":"Nemačka","a":"Tonik za negu kože lica","k":"Naneti tupferom nakon čišćenja lica.","v":""},{"s":"301012","n":"Hand & Nail Care","u":"125 ml","p":"Nemačka","a":"Krema za negu ruku i noktiju","k":"Po potrebi više puta dnevno umasirati u čiste ruke.","v":""},{"s":"303333","n":"BB Cream Blemish Beauty Balm Medium","u":"50 ml","p":"Nemačka","a":"Tonirana krema za lice, srednja nijansa","k":"Naneti ravnomerno na čistu kožu lica.","v":""},{"s":"305070","n":"clear it cream","u":"50 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Naneti na očišćenu kožu.","v":""},{"s":"305078","n":"Bio-Cellulose Mask mit Hyaluron & Aloe Vera","u":"1 maska","p":"Južna Koreja","a":"Maska za lice sa hijaluronom i aloe verom","k":"Masku staviti na čisto lice; skinuti posle 15–20 min.","v":"Ostatak seruma utapkati u kožu."},{"s":"305080","n":"Slow Aging Mask mit Adenosine & Ginseng","u":"1 maska","p":"Južna Koreja","a":"Maska za lice sa adenozinom i ženšenom","k":"Položiti na čisto lice; ukloniti prema uputstvu na pakovanju.","v":""},{"s":"305081","n":"Peel & Glow Mask mit PHA & Centella Asiatica","u":"1 maska","p":"Južna Koreja","a":"Maska za lice sa PHA i centelom","k":"Položiti na čisto lice; ukloniti prema uputstvu na pakovanju.","v":""},{"s":"330001","n":"MicroSilver BG™ Fuß Creme-Schaum","u":"150 ml","p":"Nemačka","a":"Pena-krema za negu stopala","k":"Naneti na čistu, suvu kožu stopala.","v":""},{"s":"330003K","n":"Creme-Schaum Hornhaut und Schrunden","u":"300 ml","p":"Nemačka","a":"Pena-krema za zadebljalu kožu stopala","k":"Naneti na čistu, suvu kožu stopala.","v":""},{"s":"R0003","n":"aesthetic world Facial Tonic","u":"200 ml","p":"Nemačka","a":"Tonik za negu kože lica","k":"Tupferom blago prebrisati očišćenu kožu.","v":""},{"s":"R0010","n":"MicroSilver BG Fuß Cream-Schaum","u":"300 ml","p":"Nemačka","a":"Pena-krema za negu stopala","k":"Naneti na čistu, suvu kožu stopala.","v":""},{"s":"R0013","n":"Aesthetic world Niacin transform serum","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Naneti na očišćenu kožu, zatim kremu.","v":""},{"s":"R0014","n":"Aesthetic world Niacin transform serum","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Naneti na očišćenu kožu, zatim kremu.","v":""},{"s":"R0016","n":"Aesthetic world TriHyal Age Resist Cream","u":"50 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Ujutru i uveče naneti na očišćeno lice i vrat.","v":""},{"s":"R0022","n":"aesthetic pharm Cream anti-age+","u":"50 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Naneti na čistu kožu lica i vrata.","v":""},{"s":"R0024","n":"Aestetic Pharm Cream moisture+","u":"50 ml","p":"Nemačka","a":"Hidratantna krema za lice","k":"Ujutru i uveče naneti na čistu kožu lica i vrata.","v":"Izbegavati kontakt sa očima."},{"s":"R0027","n":"Bio-Cellulose Mask mit Hyaluron & Aloe Vera (display 20 kom)","u":"20 maski","p":"Južna Koreja","a":"Maska za lice sa hijaluronom i aloe verom","k":"Masku staviti na čisto lice; skinuti posle 15–20 min.","v":"Ostatak seruma utapkati u kožu."},{"s":"R0032","n":"Ampoule Multivitamin (B, C, E)","u":"10 × 2 ml","p":"Nemačka","a":"Vitaminske ampule za negu kože","k":"Naneti na čistu kožu; zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"R0119","n":"Hyaluron aloe vera Feuchtigkeitsampulle","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za hidrataciju kože","k":"Naneti sadržaj ampule na čistu kožu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"R0122","n":"Bio - Repairampulle","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu zrele kože","k":"Naneti na čistu kožu, zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"R0123","n":"Detox Ampulle","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu kože lica","k":"Naneti na čistu kožu, zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"R0124","n":"Aesthetic World Anti - aging Sun Fluid SPF 50","u":"30 ml","p":"Nemačka","a":"Zaštitni preparat za lice SPF 50","k":"Naneti pre izlaganja suncu; obnavljati zaštitu.","v":"Izbegavati prekomerno izlaganje suncu."},{"s":"R0125","n":"Aesthetic world Clearing Foam","u":"300 ml","p":"Nemačka","a":"Pena za čišćenje kože lica","k":"Naneti na kožu i kružno umasirati; isprati mlakom vodom.","v":""},{"s":"R0135","n":"Classic Hyaluron creme","u":"50 ml","p":"Nemačka","a":"Hidratantna krema za lice","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"R0136","n":"Classic plus DiHyal soft creme","u":"50 ml","p":"Nemačka","a":"Krema za negu kože lica","k":"Ujutru i uveče naneti na očišćenu kožu lica.","v":""},{"s":"R0137","n":"classic PLUS DiHyal Eye Correction Serum","u":"30 ml","p":"Nemačka","a":"Serum za negu područja oko očiju","k":"Ujutru i uveče nežno utapkati oko očiju.","v":"Ne dozvoliti kontakt proizvoda s očima."},{"s":"R0139","n":"aesthetic pharm concentrate clear skin+","u":"15 ml","p":"Nemačka","a":"Koncentrat za problematičnu kožu","k":"Naneti na čistu kožu prema uputstvu.","v":""},{"s":"R0140","n":"Purifying Concentrate","u":"10 × 2 ml","p":"Nemačka","a":"Ampule za negu masne i nečiste kože","k":"Naneti na čistu kožu, zatim kremu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"R0141","n":"Moisturizing Concentrate","u":"10 × 2 ml","p":"Nemačka","a":"Hidratantne ampule za lice","k":"Naneti sadržaj ampule na čistu kožu.","v":"Ne u oči; ne otvarati golim rukama; odmah potrošiti."},{"s":"R0142","n":"Edition 3.5","u":"50 ml","p":"Nemačka","a":"Anti-age krema za lice","k":"Ujutru i uveče naneti na čistu kožu lica i vrata.","v":"Izbegavati kontakt sa očima."},{"s":"R0143","n":"MED HYAL cream","u":"50 ml","p":"Nemačka","a":"Hidratantna krema za lice","k":"Naneti na čistu kožu lica i vrata.","v":""},{"s":"R0145","n":"MED HYAL clear & refine","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Ujutru ili uveče na čistu kožu; zatim krema.","v":""},{"s":"R0146","n":"MED HYAL collagen manager","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Ujutru ili uveče na čistu kožu; zatim krema.","v":""},{"s":"R0147","n":"MED HYAL glow & brightening","u":"30 ml","p":"Nemačka","a":"Serum za negu kože lica","k":"Ujutru ili uveče na čistu kožu; zatim krema.","v":""},{"s":"R0150","n":"BB Cream Blemish Beauty Balm Light","u":"50 ml","p":"Nemačka","a":"Tonirana krema za lice, svetla nijansa","k":"Naneti ravnomerno na čistu kožu lica.","v":""},{"s":"R0152","n":"Creme-Schaum \"Trockene und rissige Haut\"","u":"300 ml","p":"Nemačka","a":"Pena-krema za zadebljalu kožu stopala","k":"Naneti na čistu, suvu kožu stopala.","v":""},{"s":"R0154","n":"UNG. KONCENTRAT","u":"30 ml","p":"Nemačka","a":"Kozmetički koncentrat — proveriti namenu","k":"Prema originalnoj ambalaži.","v":""},{"s":"R0155","n":"UNG. TINKTURA","u":"30 ml","p":"Nemačka","a":"Kozmetički preparat — proveriti namenu","k":"Prema originalnoj ambalaži.","v":""}];
+const $=id=>document.getElementById(id);
+const KEY="studio5-deklaracije-v1";
+const DEF_MANUF="CNC cosmetic GmbH\nBruchstücker 9, 76661 Philippsburg";
+const IMP_F5="Floor 5\nBul. Z. Đinđića 123g, Beograd";
+const IMP_GS="GORDANA ŠARAC PR\nKOZMETIČKI CENTAR STUDIO 5 NOVI BEOGRAD\nOmladinskih brigada 7b, 11070 Novi Beograd";
+const DEF_IMP=IMP_F5;
+const DEF_FOOT="INCI / LOT / rok: na kutiji";
+let S={db:BASE.map(x=>({...x})),queue:[],manuf:DEF_MANUF,imp:DEF_IMP,foot:DEF_FOOT,start:1,pre:{manuf:[DEF_MANUF],imp:[IMP_F5,IMP_GS]},removed:[]};
+try{const raw=localStorage.getItem(KEY);if(raw){const o=JSON.parse(raw);if(o&&Array.isArray(o.db)&&o.db.length){const pre=S.pre;S=Object.assign(S,o);S.removed=S.removed||[];
+    for(const k of["manuf","imp"]){S.pre=S.pre||pre;{const seen=new Set(),out=[];for(const x of[...(S.pre[k]||[]),...pre[k]]){const f=String(x).split("\n")[0].trim().toLowerCase();if(!seen.has(f)){seen.add(f);out.push(x)}}S.pre[k]=out}}
+    const have=new Set(S.db.map(p=>p.s));for(const b of BASE)if(!have.has(b.s)&&!S.removed.includes(b.s))S.db.push({...b})}}}catch(e){}
+let saveT;function flush(){clearTimeout(saveT);try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){clearTimeout(saveT);saveT=setTimeout(flush,200)}
+window.addEventListener("pagehide",flush);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden")flush()});
+const norm=s=>String(s||"").toLowerCase().replace(/đ/g,"d").normalize("NFD").replace(/[̀-ͯ]/g,"");
+const byId=()=>new Map(S.db.map(p=>[p.s,p]));
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const incomplete=p=>!p.a||!p.k;
+let tt;function toast(m,ms=2800){const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,ms)}
+
+/* ---------- postavke ---------- */
+function fillPresets(kind){
+  const sel=$(kind+"Pre"),list=S.pre[kind]||[];
+  sel.innerHTML='<option value="">Sačuvani…</option>'+list.map((t,i)=>`<option value="${i}">${esc(String(t).split("\n")[0])}</option>`).join("");
+}
+function initSettings(){
+  $("manuf").value=S.manuf;$("imp").value=S.imp;$("foot").value=S.foot;
+  fillPresets("manuf");fillPresets("imp");
+  const bind=(id,k)=>$(id).addEventListener("input",()=>{S[k]=$(id).value;save();renderPreview()});
+  bind("manuf","manuf");bind("imp","imp");bind("foot","foot");
+  for(const kind of["manuf","imp"]){
+    $(kind+"Pre").onchange=e=>{const v=e.target.value;if(v==="")return;S[kind]=S.pre[kind][+v];$(kind).value=S[kind];e.target.value="";save();renderPreview()};
+    $(kind+"Save").onclick=()=>{const t=$(kind).value.trim();if(!t)return;const L=S.pre[kind],first=t.split("\n")[0].trim().toLowerCase();const i=L.findIndex(x=>x.split("\n")[0].trim().toLowerCase()===first);if(i>=0)L[i]=t;else L.push(t);fillPresets(kind);save();toast("Sačuvano: "+t.split("\n")[0])};
+    $(kind+"Del").onclick=()=>{const t=$(kind).value.trim(),first=t.split("\n")[0].trim().toLowerCase(),L=S.pre[kind];const i=L.findIndex(x=>x.split("\n")[0].trim().toLowerCase()===first);if(i<0){toast("Taj unos nije među sačuvanima.");return}L.splice(i,1);fillPresets(kind);save();toast("Obrisano iz sačuvanih")};
+  }
+}
+
+/* ---------- pretraga i izbor ---------- */
+let picked=null,hi=-1,shown=[];
+function matches(){
+  const toks=norm($("q").value).split(/\s+/).filter(Boolean);
+  const L=S.db.filter(p=>{const h=norm(p.s+" "+p.n);return toks.every(t=>h.includes(t))});
+  return L.sort((a,b)=>a.n.localeCompare(b.n,"sr")||a.s.localeCompare(b.s));
+}
+function renderResults(){
+  shown=matches();const ul=$("results");
+  $("resCount").textContent=$("q").value.trim()?shown.length+" od "+S.db.length:S.db.length+" proizvoda";
+  if(!shown.length){ul.innerHTML='<li class="none" style="display:block;cursor:default">Nema takvog proizvoda. Dodaj ga preko menija (⋯) ili učitaj listu.</li>';return}
+  if(hi>=shown.length)hi=shown.length-1;
+  ul.innerHTML=shown.map((p,i)=>`<li role="option" data-i="${i}" class="${i===hi?"on":""}${picked&&picked.s===p.s?" sel":""}" aria-selected="${picked&&picked.s===p.s}"><span class="nm">${esc(p.n)}</span><span class="badge">${incomplete(p)?"bez opisa":""}</span><span class="meta">#${esc(p.s)}${p.u?" · "+esc(p.u):""}</span></li>`).join("");
+}
+function pick(p){
+  picked=p;$("picked").hidden=false;$("pkName").textContent=p.n;
+  $("pkMeta").textContent="#"+p.s+(p.u?" · "+p.u:"")+(p.p?" · "+p.p:"");
+  const inQ=S.queue.find(x=>x.s===p.s);$("pkQty").value=1;
+  renderResults();$("pkQty").focus();$("pkQty").select();
+  if(inQ)toast("Već je na listi ("+inQ.q+"). Količina se dodaje na postojeću.",2600);
+}
+$("results").addEventListener("click",e=>{const li=e.target.closest("li[data-i]");if(li)pick(shown[+li.dataset.i])});
+$("q").addEventListener("input",()=>{hi=$("q").value.trim()?0:-1;renderResults()});
+$("q").addEventListener("keydown",e=>{
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();hi=Math.max(0,Math.min(shown.length-1,hi+(e.key==="ArrowDown"?1:-1)));renderResults();const li=$("results").querySelector(".on");if(li)li.scrollIntoView({block:"nearest"})}
+  else if(e.key==="Enter"){e.preventDefault();const p=shown[Math.max(0,hi)];if(p)pick(p)}
+  else if(e.key==="Escape"){$("q").value="";hi=-1;renderResults()}
+});
+const clampQ=v=>Math.max(1,Math.min(999,Math.floor(Number(v)||1)));
+$("pkMinus").onclick=()=>{$("pkQty").value=clampQ(+$("pkQty").value-1)};
+$("pkPlus").onclick=()=>{$("pkQty").value=clampQ(+$("pkQty").value+1)};
+function addPicked(){
+  if(!picked)return;const q=clampQ($("pkQty").value);
+  const ex=S.queue.find(x=>x.s===picked.s);if(ex)ex.q=Math.min(9999,ex.q+q);else S.queue.push({s:picked.s,q});
+  toast(`Dodato: ${picked.n} × ${q}`);
+  picked=null;$("picked").hidden=true;$("q").value="";hi=-1;save();renderAll();$("q").focus();
+}
+$("pkAdd").onclick=addPicked;
+$("pkQty").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addPicked()}if(e.key==="Escape"){picked=null;$("picked").hidden=true;renderResults();$("q").focus()}});
+document.addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$("q").focus();$("q").select()}});
+
+/* ---------- lista za štampu ---------- */
+function slots(){ // niz proizvoda po poljima (null = preskočeno)
+  const m=byId(),a=[];for(let i=1;i<S.start;i++)a.push(null);
+  for(const it of S.queue){const p=m.get(it.s);if(!p)continue;for(let i=0;i<it.q;i++)a.push(p)}
+  return a;
+}
+const total=()=>S.queue.reduce((a,x)=>a+x.q,0);
+function renderQueue(){
+  const m=byId(),ul=$("queue");
+  if(!S.queue.length){
+    ul.innerHTML=`<li class="empty"><b>Lista je prazna</b><span>Izaberi proizvod levo, upiši broj nalepnica i pritisni Enter.</span></li></li>`;
+  }else{
+    ul.innerHTML=S.queue.map((it,i)=>{const p=m.get(it.s);if(!p)return"";
+      return `<li class="qi" data-i="${i}"><div><div class="nm">${esc(p.n)}</div><div class="meta"><span>#${esc(p.s)}</span>${p.u?`<span>${esc(p.u)}</span>`:""}${incomplete(p)?'<span class="warn">nema opis</span>':""}<button class="edit" data-a="edit">Uredi tekst</button></div></div>
+      <div class="stepper"><button data-a="minus" aria-label="Manje">−</button><input class="qty" data-a="qty" type="number" min="1" max="9999" value="${it.q}" aria-label="Broj nalepnica za ${esc(p.n)}"><button data-a="plus" aria-label="Više">+</button></div>
+      <button class="btn icon" data-a="rm" aria-label="Ukloni ${esc(p.n)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></li>`}).join("");
+  }
+  const n=total(),cells=S.start-1+n,pages=Math.ceil(cells/32),free=pages?pages*32-cells:0;
+  $("sTot").textContent=n;$("sPg").textContent=pages;$("sFree").textContent=free;
+  $("qSub").textContent=S.queue.length?S.queue.length+" proizvoda":"";
+  $("dlBtn").disabled=!n;
+  renderMap();
+}
+$("queue").addEventListener("click",e=>{
+  const b=e.target.closest("[data-a]");if(!b)return;const li=b.closest("li[data-i]");if(!li)return;const it=S.queue[+li.dataset.i],a=b.dataset.a;
+  if(a==="minus")it.q=Math.max(1,it.q-1);else if(a==="plus")it.q=Math.min(9999,it.q+1);
+  else if(a==="rm")S.queue.splice(+li.dataset.i,1);
+  else if(a==="edit"){openEdit(it.s);return}
+  else return;
+  save();renderAll();
+});
+$("queue").addEventListener("change",e=>{if(e.target.dataset.a!=="qty")return;const li=e.target.closest("li[data-i]");S.queue[+li.dataset.i].q=Math.max(1,Math.min(9999,Math.floor(+e.target.value)||1));save();renderAll()});
+$("clrBtn").onclick=()=>{if(!S.queue.length)return;if($("clrBtn").dataset.arm){S.queue=[];S.start=1;delete $("clrBtn").dataset.arm;$("clrBtn").textContent="Očisti listu";save();renderAll();return}
+  $("clrBtn").dataset.arm=1;$("clrBtn").textContent="Dodirni ponovo: briše listu";setTimeout(()=>{delete $("clrBtn").dataset.arm;$("clrBtn").textContent="Očisti listu"},3200)};
+
+/* mapa prve strane */
+function renderMap(){
+  const n=total(),map=$("map");let h="";
+  for(let i=1;i<=32;i++){const cls=i<S.start?"skip":(i-S.start<n?"use":"");h+=`<button class="${cls}" data-n="${i}" aria-label="Polje ${i}" aria-pressed="${i===S.start}" title="Polje ${i}"></button>`}
+  map.innerHTML=h;
+  $("mapHint").textContent=S.start===1?"Štampa počinje od prvog polja. Dodirni polje na koje treba da se odštampa prva nalepnica, a ranija ostaju prazna.":`Prvih ${S.start-1} polja ostaje prazno. Prva nalepnica ide u polje ${S.start}.`;
+  $("mapBox").querySelector("summary").textContent=S.start===1?"Počni od određenog polja (delimično iskorišćen list)":"Počinje od polja "+S.start+" (promeni)";
+}
+$("map").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.start=+b.dataset.n;save();renderAll()});
+
+/* ---------- A4 pregled ---------- */
+let page=0;
+function labelHtml(p){
+  const lines=x=>String(x||"").split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  const d=(inner,sz,b)=>`<div style="font-size:${sz}pt">${b?`<b>${inner}</b>`:inner}</div>`;
+  let h=`<div style="font-size:6pt;font-weight:700;color:#222E3E">#${esc(p.s)}</div>`+`<div style="font-size:6.5pt;font-weight:700">${esc(p.n)}</div>`;
+  if(p.a)h+=`<div style="font-size:5.5pt"><b>Namena:</b> ${esc(p.a)}</div>`;
+  if(p.u||p.p)h+=`<div style="font-size:5.5pt">${p.u?`<b>Neto:</b> ${esc(p.u)}`:""}${p.p?`${p.u?"&nbsp; | &nbsp;":""}Poreklo: ${esc(p.p)}`:""}</div>`;
+  for(const [lab,txt] of[["Proizvođač:",S.manuf],["Uvoznik:",S.imp]]){const L=lines(txt);if(!L.length)continue;h+=`<div style="font-size:5.5pt"><b>${lab}</b> ${esc(L[0])}</div>`;for(const x of L.slice(1))h+=`<div style="font-size:5pt">${esc(x)}</div>`}
+  if(p.k)h+=`<div style="font-size:5.5pt"><b>Upotreba:</b> ${esc(p.k)}</div>`;
+  if(p.v)h+=`<div style="font-size:5pt"><b>Važno:</b> ${esc(p.v)}</div>`;
+  if(S.foot)h+=`<div style="font-size:5.5pt">${esc(S.foot)}</div>`;
+  return h;
+}
+const CX=[40.5,170.9,306.0,440.9],CW=[123.5,127.9,128.0,121.4];
+function renderPreview(){
+  const sl=slots(),pages=Math.max(1,Math.ceil(sl.length/32));
+  if(page>=pages)page=pages-1;if(page<0)page=0;
+  $("pgInfo").textContent=`Strana ${page+1} / ${pages}`;$("pgPrev").disabled=page===0;$("pgNext").disabled=page>=pages-1;
+  let h="";
+  if(!sl.length)h='<div class="sheetnote">Pregled se pojavljuje čim dodaš prvi proizvod</div>';
+  else for(let i=0;i<32;i++){const p=sl[page*32+i];const r=Math.floor(i/4),c=i%4;
+    const pos=`left:${CX[c]}pt;top:${31.7+99*r}pt;width:${CW[c]}pt`;
+    if(p===undefined)continue;
+    h+=p===null?`<div class="lb skipc" style="${pos}"></div>`:`<div class="lb" style="${pos}">${labelHtml(p)}</div>`}
+  $("sheet").innerHTML=h;fitSheet();
+}
+function fitSheet(){const w=$("sheetWrap").clientWidth;if(w)$("sheet").style.transform=`scale(${w/(595.3*96/72)})`}
+new ResizeObserver(fitSheet).observe($("sheetWrap"));
+$("pgPrev").onclick=()=>{page--;renderPreview()};$("pgNext").onclick=()=>{page++;renderPreview()};
+
+/* ---------- čuvanje fajlova ---------- */
+async function saveFile(name,data,mime){
+  let dl=null;try{if(window.claude&&window.claude.use)dl=await window.claude.use("downloads")}catch(e){}
+  const blob=new Blob([data],{type:mime});
+  if(dl){try{await dl.save({filename:name,data:blob});return true}catch(e){if(e&&e.code==="declined")return false;throw e}}
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);return true;
+}
+const DOCX="application/vnd.openxmlformats-officedocument.wordprocessingml.document",XLSXM="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+$("dlBtn").onclick=async()=>{
+  const sl=slots();if(!sl.length)return;
+  if(!window.JSZip){toast("Biblioteka za Word se nije učitala. Proveri internet i osveži stranu.",4000);return}
+  const missing=[...new Set(sl.filter(p=>p&&incomplete(p)).map(p=>p.s))];
+  try{
+    const stamp=new Date().toISOString().slice(0,10);
+    const bytes=await buildDocx(JSZip,sl,{manufacturer:S.manuf,importer:S.imp,footer:S.foot},{title:"Deklaracije Studio 5 "+stamp});
+    const ok=await saveFile(`deklaracije-${stamp}-${sl.filter(Boolean).length}-nalepnica.docx`,bytes,DOCX);
+    if(ok)toast(missing.length?`Word je spreman. ${missing.length} proizvoda nema pun opis, proveri ih pre štampe.`:"Word je spreman za štampu.",4200);
+  }catch(err){toast("Preuzimanje nije uspelo. Pokušaj ponovo.",3500)}
+};
+
+/* ---------- uređivanje proizvoda ---------- */
+let editing=null;
+function openEdit(s){
+  const p=s?byId().get(s):null;editing=p?p.s:null;
+  $("edTitle").textContent=p?"Uredi proizvod":"Novi proizvod";$("eDel").hidden=!p;$("eMsg").textContent="";
+  $("eS").value=p?p.s:"";$("eN").value=p?p.n:"";$("eU").value=p?p.u:"";$("eP").value=p?p.p:"Nemačka";$("eA").value=p?p.a:"";$("eK").value=p?p.k:"";$("eV").value=p?p.v:"";
+  $("eS").readOnly=!!p;$("edScrim").hidden=false;setTimeout(()=>$(p?"eA":"eS").focus(),30);
+}
+$("eCancel").onclick=()=>$("edScrim").hidden=true;
+$("edScrim").addEventListener("mousedown",e=>{if(e.target===$("edScrim"))$("edScrim").hidden=true});
+$("eSave").onclick=()=>{
+  const s=$("eS").value.trim(),n=$("eN").value.trim();
+  if(!s||!n){$("eMsg").textContent="Šifra i naziv su obavezni.";return}
+  const rec={s,n,u:$("eU").value.trim(),p:$("eP").value.trim(),a:$("eA").value.trim(),k:$("eK").value.trim(),v:$("eV").value.trim()};
+  const i=S.db.findIndex(x=>x.s===s);
+  if(editing===null&&i>=0){$("eMsg").textContent="Šifra "+s+" već postoji.";return}
+  if(i>=0)S.db[i]=rec;else S.db.push(rec);
+  save();$("edScrim").hidden=true;renderAll();toast("Sačuvano: "+n);
+};
+$("eDel").onclick=()=>{
+  if(!$("eDel").dataset.arm){$("eDel").dataset.arm=1;$("eDel").textContent="Dodirni ponovo za brisanje";setTimeout(()=>{delete $("eDel").dataset.arm;$("eDel").textContent="Obriši proizvod"},3200);return}
+  delete $("eDel").dataset.arm;$("eDel").textContent="Obriši proizvod";
+  S.db=S.db.filter(x=>x.s!==editing);S.removed.push(editing);S.queue=S.queue.filter(x=>x.s!==editing);save();$("edScrim").hidden=true;renderAll();toast("Proizvod obrisan");
+};
+
+/* ---------- uvoz liste (Excel, CSV, PDF) ---------- */
+const nk=s=>norm(s).replace(/[^a-z0-9]/g,"");
+const SYN={s:["sifra","code","sku","artikal","sifraartikla","sifraproizvoda","id"],n:["naziv","nazivartikla","nazivproizvoda","name","proizvod","opis"],u:["neto","net","pakovanje","sadrzaj","kolicina","velicina","netokolicina"],p:["poreklo","zemljaporekla","origin","zemlja"],a:["namena","namenaproizvoda"],k:["upotreba","nacinupotrebe","upute","uputstvo"],v:["vazno","napomena","upozorenje","upozorenja"]};
+function parseAoa(aoa){
+  let h=-1,col={};
+  for(let r=0;r<Math.min(aoa.length,40)&&h<0;r++){
+    const cells=(aoa[r]||[]).map(nk),c={};
+    for(const k in SYN){const i=cells.findIndex(x=>SYN[k].includes(x));if(i>=0)c[k]=i}
+    if(c.s!==undefined&&c.n!==undefined&&c.s!==c.n){h=r;col=c}
+  }
+  if(h<0)return null;
+  const out=[];
+  for(let r=h+1;r<aoa.length;r++){
+    const row=aoa[r]||[],g=k=>col[k]===undefined?"":String(row[col[k]]==null?"":row[col[k]]).trim();
+    const s=g("s"),n=g("n");if(!s||!n||/^ukupno/i.test(s))continue;
+    out.push({s,n,u:g("u"),p:g("p"),a:g("a"),k:g("k"),v:g("v"),_full:["u","p","a","k","v"].some(k=>col[k]!==undefined)});
+  }
+  return out;
+}
+const SIZE=/(\d+(?:[.,]\d+)?\s*(?:x|×)\s*)?\d+(?:[.,]\d+)?\s*(?:ml|g|kg|l|oz)\b/i;
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>rej(new Error("nema mreže"));document.head.appendChild(s)})}
+function parseLines(lines){
+  const rows=[],codeRe=/^[A-Za-z]?\d{3,8}[A-Za-z]?$/,numRe=/^-?[\d.,]+$/;let last=null;
+  for(const line of lines){const t=line.trim().split(/\s+/);
+    if(t.length>=4&&codeRe.test(t[0])){const tail=[];while(t.length>1&&numRe.test(t[t.length-1])&&tail.length<5)tail.unshift(t.pop());
+      if(tail.length>=3){if(/^(kom|kg|g|l|ml|pak|set|kut|par)$/i.test(t[t.length-1])&&t.length>2)t.pop();last={s:t[0],n:t.slice(1).join(" "),u:"",p:"",a:"",k:"",v:"",_full:false};rows.push(last);continue}}
+    if(last&&line.length<70&&!/(stranica|pib|lager|magacin|cena:|ukupno|^\s*[šs]ifra)/i.test(line)&&!/^\d/.test(t[0]))last.n+=" "+line.trim();else if(/ukupno/i.test(line))last=null}
+  return rows;
+}
+async function readPdf(buf){
+  if(!window.pdfjsLib){await loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js");await loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js")}
+  const pdf=await pdfjsLib.getDocument({data:new Uint8Array(buf),useWorkerFetch:false,isEvalSupported:false}).promise,lines=[];
+  for(let p=1;p<=pdf.numPages;p++){const tc=await(await pdf.getPage(p)).getTextContent();
+    const its=tc.items.filter(x=>x.str&&x.str.trim()).map(x=>({s:x.str,x:x.transform[4],y:x.transform[5]}));its.sort((a,b)=>b.y-a.y||a.x-b.x);
+    let cur=[],cy=null;const fl=()=>{if(cur.length){cur.sort((a,b)=>a.x-b.x);lines.push(cur.map(i=>i.s.trim()).join(" "))}cur=[]};
+    for(const it of its){if(cy===null||Math.abs(it.y-cy)>2.5){fl();cy=it.y}cur.push(it)}fl()}
+  return parseLines(lines);
+}
+function mergeRows(rows){
+  const m=byId();let added=0,upd=0;
+  for(const r of rows){
+    if(/prefaktur|trosk|transport|usluga/.test(norm(r.n)))continue; // troškovi i usluge nisu proizvodi
+    const ex=m.get(r.s);
+    if(ex){if(r._full){for(const k of["n","u","p","a","k","v"])if(r[k])ex[k]=r[k];upd++}}
+    else{const u=r.u||(SIZE.exec(r.n)||[""])[0].replace(/\s+/g," ").trim();const p={s:r.s,n:r.n,u,p:r.p||"Nemačka",a:r.a,k:r.k,v:r.v};S.db.push(p);m.set(p.s,p);added++}
+  }
+  return {added,upd};
+}
+$("impBtn").onclick=()=>$("file").click();
+async function importFile(f){
+  if(!f)return;toast("Čitam fajl…",20000);
+  try{
+    const buf=await f.arrayBuffer();let rows;
+    if(/\.pdf$/i.test(f.name))rows=await readPdf(buf);
+    else{if(!window.XLSX)throw new Error("xlsx");const wb=XLSX.read(buf,{type:"array"});
+      for(const nm of wb.SheetNames){rows=parseAoa(XLSX.utils.sheet_to_json(wb.Sheets[nm],{header:1,raw:true,defval:""}));if(rows&&rows.length)break}}
+    if(!rows||!rows.length){toast("Nisam našao tabelu sa kolonama Šifra i Naziv. Preuzmi Excel šablon iz menija (⋯).",5500);return}
+    const r=mergeRows(rows);save();renderAll();
+    const inc=S.db.filter(incomplete).length;
+    toast(`Uvezeno: ${r.added} novih, ${r.upd} ažuriranih.`+(inc?` ${inc} proizvoda nema namenu ili upotrebu (Uredi tekst).`:""),6000);
+  }catch(err){toast("Fajl nije moguće pročitati. Probaj Excel ili CSV prema šablonu.",5000)}
+}
+$("file").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];e.target.value="";importFile(f)});
+const body=document.body;
+["dragover","dragenter"].forEach(t=>body.addEventListener(t,e=>{e.preventDefault();body.classList.add("dropzone")}));
+["dragleave","drop"].forEach(t=>body.addEventListener(t,e=>{e.preventDefault();body.classList.remove("dropzone")}));
+body.addEventListener("drop",e=>importFile(e.dataTransfer&&e.dataTransfer.files[0]));
+
+/* ---------- meni ---------- */
+const mp=$("menuPop");
+$("menuBtn").onclick=e=>{e.stopPropagation();mp.hidden=!mp.hidden;$("menuBtn").setAttribute("aria-expanded",String(!mp.hidden))};
+document.addEventListener("click",()=>{mp.hidden=true;$("menuBtn").setAttribute("aria-expanded","false")});
+$("mNew").onclick=()=>openEdit(null);
+const HEADX=["Šifra","Naziv","Neto","Poreklo","Namena","Upotreba","Važno"];
+async function xlsxOut(rows,name){
+  if(!window.XLSX){toast("Excel biblioteka se nije učitala.");return}
+  const ws=XLSX.utils.aoa_to_sheet([HEADX,...rows]);ws["!cols"]=[{wch:10},{wch:44},{wch:12},{wch:14},{wch:34},{wch:56},{wch:44}];
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Proizvodi");
+  const data=XLSX.write(wb,{type:"array",bookType:"xlsx"});if(await saveFile(name,data,XLSXM))toast("Fajl je spreman.");
+}
+$("mTpl").onclick=()=>xlsxOut(BASE.slice(0,3).map(p=>[p.s,p.n,p.u,p.p,p.a,p.k,p.v]),"sablon-lista-proizvoda.xlsx");
+$("mExp").onclick=()=>xlsxOut(S.db.map(p=>[p.s,p.n,p.u,p.p,p.a,p.k,p.v]),"baza-proizvoda-studio5.xlsx");
+$("mReset").onclick=()=>{if(!$("mReset").dataset.arm){$("mReset").dataset.arm=1;$("mReset").textContent="Klikni ponovo: briše tvoje izmene";setTimeout(()=>{delete $("mReset").dataset.arm;$("mReset").textContent="Vrati originalnu bazu"},3200);return}
+  S.db=BASE.map(x=>({...x}));S.removed=[];S.queue=[];S.start=1;save();mp.hidden=true;delete $("mReset").dataset.arm;$("mReset").textContent="Vrati originalnu bazu";renderAll();toast("Vraćena originalna baza.")};
+
+let sharedVer="";
+function renderAll(){$("dbPill").textContent=(sharedVer?"Zajednička baza: ":"Baza: ")+S.db.length+" proizvoda";$("dbPill").title=sharedVer?"Verzija zajedničke baze: "+sharedVer:"";renderResults();renderQueue();renderPreview()}
+/* ---------- zajednička baza (baza.json pored stranice) ---------- */
+function mergePre(kind,list){
+  if(!Array.isArray(list)||!list.length)return;
+  const seen=new Set(),out=[];
+  for(const x of[...list,...(S.pre[kind]||[])]){const f=String(x).split("\n")[0].trim().toLowerCase();if(f&&!seen.has(f)){seen.add(f);out.push(String(x))}}
+  S.pre[kind]=out;fillPresets(kind);
+}
+async function syncShared(){
+  let j;
+  try{const r=await fetch("baza.json",{cache:"no-store"});if(!r.ok)return;j=await r.json()}catch(e){return}
+  if(!j||!Array.isArray(j.proizvodi)||!j.proizvodi.length)return;
+  sharedVer=String(j.verzija||"");
+  if(S.baseVer!==sharedVer){
+    const m=byId(),codes=new Set();let add=0,chg=0,del=0;
+    for(const q of j.proizvodi){
+      if(!q||!q.s||!q.n)continue;codes.add(q.s);
+      const rec={s:String(q.s),n:q.n,u:q.u||"",p:q.p||"",a:q.a||"",k:q.k||"",v:q.v||""},ex=m.get(rec.s);
+      if(!ex){S.db.push(rec);add++}else if(["n","u","p","a","k","v"].some(k=>ex[k]!==rec[k])){Object.assign(ex,rec);chg++}
+      S.removed=S.removed.filter(x=>x!==rec.s);
+    }
+    for(const c of(S.shared||[]))if(!codes.has(c)){S.db=S.db.filter(x=>x.s!==c);S.queue=S.queue.filter(x=>x.s!==c);S.removed.push(c);del++}
+    S.shared=[...codes];S.baseVer=sharedVer;
+    mergePre("imp",j.uvoznici);mergePre("manuf",j.proizvodjaci);
+    save();renderAll();
+    if(add||chg||del)toast(`Zajednička baza ažurirana: ${add} novih, ${chg} izmenjenih`+(del?`, ${del} uklonjenih`:"")+".",5000);
+  }else renderAll();
+}
+$("mShare").onclick=async()=>{
+  const o={verzija:new Date().toISOString(),proizvodi:S.db,uvoznici:S.pre.imp,proizvodjaci:S.pre.manuf};
+  try{if(await saveFile("baza.json",JSON.stringify(o,null,1),"application/json"))toast("baza.json je spreman. Otpremi ga na GitHub umesto stare, pa ga svi računari preuzimaju pri sledećem otvaranju.",7000)}catch(e){toast("Čuvanje nije uspelo. Pokušaj ponovo.")}
+};
+initSettings();renderAll();syncShared();
+</script>
+</body></html>
