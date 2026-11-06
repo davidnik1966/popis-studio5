@@ -1,5 +1,5 @@
 // Radi offline: prvo prikaže sačuvanu kopiju, pa u pozadini osveži (nova verzija se vidi pri sledećem otvaranju).
-const V = "popis-studio5-v1";
+const V = "popis-studio5-v2";
 const FILES = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(V).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => {

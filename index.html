@@ -94,6 +94,8 @@ ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;g
 .btn.danger{color:var(--bad)}
 .meta{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .ean{color:var(--accent);font-weight:700}
+.pricechip{font:inherit;font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;min-height:20px}
+.pricechip.none{color:var(--accent);font-weight:700;text-decoration:none}
 .cells{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:end;margin-top:12px}
 .cell{display:flex;flex-direction:column;align-items:center;min-width:0}
 .cl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:5px}
@@ -234,6 +236,7 @@ body.scanning .toast{top:calc(16px + env(safe-area-inset-top,0px));bottom:auto}
       <div class="field"><label for="aCode">Šifra</label><div class="in2"><input id="aCode" autocomplete="off" placeholder="automatski"></div></div>
       <div class="field"><label for="aStock">Stanje</label><div class="in2"><input id="aStock" type="number" inputmode="numeric" min="0" value="0"></div></div>
     </div>
+    <div class="field"><label for="aPrice">Cena (RSD)</label><div class="in2"><input id="aPrice" type="number" inputmode="decimal" min="0" placeholder="Npr. 3500"></div></div>
     <div class="msg" id="aMsg" role="alert"></div>
     <button class="btn primary" id="aSave">Dodaj na listu</button>
     <button class="btn" id="aCancel">Odustani</button>
@@ -248,6 +251,16 @@ body.scanning .toast{top:calc(16px + env(safe-area-inset-top,0px));bottom:auto}
     <p>Stanje svih artikala se prvo postavi na 0, pa se upiše stanje iz fajla. Artikli kojih nema u fajlu ostaju sa stanjem 0. Popisano se ne dira.</p>
     <button class="btn" id="impMerge">Samo dopuni artikle iz fajla</button>
     <button class="btn" id="impCancel">Odustani</button>
+  </div>
+</div>
+
+<div class="scrim" id="priceScrim" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="priceTitle">
+    <h2 id="priceTitle">Cena artikla</h2>
+    <p id="priceInfo"></p>
+    <div class="field"><label for="pVal">Cena (RSD)</label><div class="in2"><input id="pVal" type="number" inputmode="decimal" min="0" placeholder="Npr. 3500"></div></div>
+    <button class="btn primary" id="pOk">Sačuvaj cenu</button>
+    <button class="btn" id="pCancel">Odustani</button>
   </div>
 </div>
 
@@ -349,6 +362,7 @@ let S={ts:0,items:null,counts:{},codes:{},del:[]};
 let byId=new Map(),eans={};
 let filter="all",query="",pendingCode=null,camTarget="scan";
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtRsd=n=>Math.round(n).toLocaleString("sr-Latn-RS")+" RSD";
 const fmt=n=>(n>0?"+":n<0?"−":"")+Math.abs(n);
 const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"dj");
 function reindex(){
@@ -377,7 +391,7 @@ function initDb(){}
 function rowHtml(i){
   const c=S.counts[i.s],st=stateOf(i),e=eans[i.s];
   const ean=e&&e.length?`<span class="ean">EAN ${esc(e[0])}${e.length>1?" +"+(e.length-1):""}</span>`:"";
-  return `<li class="row" data-s="${esc(i.s)}"><div class="top"><div class="nm">${esc(i.n)}</div><button class="del" data-a="del" aria-label="Obriši artikal zauvek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button></div><div class="meta"><span>${esc(i.s)}</span>${ean}</div>
+  return `<li class="row" data-s="${esc(i.s)}"><div class="top"><div class="nm">${esc(i.n)}</div><button class="del" data-a="del" aria-label="Obriši artikal zauvek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button></div><div class="meta"><span>${esc(i.s)}</span>${ean}<button class="pricechip${i.c?"":" none"}" data-a="price" aria-label="Izmeni cenu">${i.c?fmtRsd(i.c):"+ cena"}</button></div>
   <div class="cells">
     <div class="cell"><span class="cl">Stanje</span><div class="box">${i.b}</div></div>
     <div class="cell"><span class="cl">Popisano</span><div class="step"><button class="sbtn" data-a="dec" aria-label="Smanji">−</button><input class="qty" type="number" min="0" inputmode="numeric" pattern="[0-9]*" placeholder="–" value="${c===undefined?"":c}" aria-label="Popisano komada"><button class="sbtn" data-a="inc" aria-label="Povećaj">+</button></div></div>
@@ -403,7 +417,8 @@ function renderSummary(){
   $("sBook").textContent=book;$("sIss").textContent=iss;
   const sd=$("sDiff");sd.textContent=done?(diff===0?"✓":fmt(diff)):"0";sd.className=!done||diff===0?"zero":diff>0?"pos":"neg";
   const p=S.items.length?Math.round(done/S.items.length*100):0;$("fill").style.width=p+"%";$("track").setAttribute("aria-valuenow",p);
-  $("codeInfo").textContent=S.items.length+" artikala na listi · "+Object.keys(S.codes).length+" naučenih barkodova"+(S.del.length?" · "+S.del.length+" obrisanih":"");$("restoreBtn").hidden=!S.del.length;
+  let vd=0,vb=0,noPrice=0;for(const i of S.items){vb+=i.b*(i.c||0);const c=S.counts[i.s];if(c!==undefined){vd+=(c-i.b)*(i.c||0);if(!i.c)noPrice++}}
+  $("codeInfo").textContent="Vrednost razlike: "+(vd>0?"+":vd<0?"−":"")+fmtRsd(Math.abs(vd))+" · vrednost stanja: "+fmtRsd(vb)+(noPrice?" · bez cene (prebrojano): "+noPrice:"")+" · "+S.items.length+" artikala na listi · "+Object.keys(S.codes).length+" naučenih barkodova"+(S.del.length?" · "+S.del.length+" obrisanih":"");$("restoreBtn").hidden=!S.del.length;
 }
 function renderAll(){renderList();renderSummary()}
 function refreshRow(s){
@@ -425,6 +440,7 @@ $("list").addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;
   const s=b.closest(".row").dataset.s,c=S.counts[s];
   if(b.dataset.a==="del"){askDelete(s);return}
+  if(b.dataset.a==="price"){openPrice(s);return}
   if(b.dataset.a==="inc")inc(s);else setQty(s,c===undefined?0:Math.max(0,c-1));
 });
 $("list").addEventListener("change",e=>{
@@ -503,6 +519,23 @@ $("cam").addEventListener("change",async e=>{
   }else handleCode(code);
 });
 
+/* ---------- cena artikla ---------- */
+let priceFor=null;
+function openPrice(s){
+  const i=byId.get(s);if(!i)return;priceFor=s;
+  $("priceInfo").textContent=i.n;$("pVal").value=i.c||"";
+  $("priceScrim").hidden=false;setTimeout(()=>{$("pVal").focus();$("pVal").select()},50);
+}
+$("pCancel").onclick=()=>{$("priceScrim").hidden=true;priceFor=null};
+$("pOk").onclick=()=>{
+  const i=byId.get(priceFor);if(!i)return;
+  i.c=Math.max(0,Math.round(num($("pVal").value)||0));touch();
+  const li=$("list").querySelector(`[data-s="${CSS.escape(i.s)}"] .pricechip`);
+  if(li){li.textContent=i.c?fmtRsd(i.c):"+ cena";li.classList.toggle("none",!i.c)}
+  renderSummary();$("priceScrim").hidden=true;priceFor=null;toast("Cena sačuvana: "+(i.c?fmtRsd(i.c):"bez cene"));
+};
+$("pVal").addEventListener("keydown",e=>{if(e.key==="Enter")$("pOk").click()});
+
 /* ---------- živo skeniranje kamerom ---------- */
 const scan={on:false,stream:null,det:null,rd:null,t:0,last:"",seen:0,count:0,cv:document.createElement("canvas"),wake:null};
 let ac;function beep(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=1100;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.09)}catch(e){}}
@@ -580,7 +613,7 @@ document.addEventListener("visibilitychange",()=>{if(document.hidden&&scan.on)cl
 
 /* ---------- dodavanje novog proizvoda ---------- */
 function openAdd(ean){
-  $("aEan").value=ean||"";$("aName").value="";$("aCode").value="";$("aStock").value="0";$("aMsg").textContent="";
+  $("aEan").value=ean||"";$("aName").value="";$("aCode").value="";$("aStock").value="0";$("aPrice").value="";$("aMsg").textContent="";
   $("addScrim").hidden=false;setTimeout(()=>$("aName").focus(),50);
 }
 $("addBtn").onclick=()=>openAdd("");
@@ -593,7 +626,8 @@ $("aSave").onclick=()=>{
   const s=$("aCode").value.trim()||ean||("N"+Date.now().toString(36).toUpperCase());
   if(byId.has(s)){msg.textContent="Šifra "+s+" već postoji na listi.";return}
   const stock=Math.max(0,Math.floor(Number($("aStock").value)||0));
-  S.items.push({s,n:name,b:stock,c:0,a:1});S.del=S.del.filter(x=>x.s!==s);
+  const price=Math.max(0,Math.round(num($("aPrice").value)||0));
+  S.items.push({s,n:name,b:stock,c:price,a:1});S.del=S.del.filter(x=>x.s!==s);
   if(ean)S.codes[ean]=s;
   S.counts[s]=1;reindex();touch();
   filter="all";query="";$("q").value="";$("qClear").hidden=true;
@@ -763,27 +797,50 @@ $("resetBtn").onclick=()=>{
   if(!armed){armed=true;$("resetBtn").textContent="Dodirni ponovo: briše sve brojeve";setTimeout(()=>{armed=false;$("resetBtn").textContent="Obriši brojanje"},3500);return}
   armed=false;S.counts={};touch();renderAll();$("menuScrim").hidden=true;toast("Brojanje obrisano");
 };
-[$("pickScrim"),$("menuScrim"),$("addScrim"),$("delScrim")].forEach(sc=>sc.addEventListener("click",e=>{if(e.target===sc){sc.hidden=true;pendingCode=null}}));
+[$("pickScrim"),$("menuScrim"),$("addScrim"),$("delScrim"),$("priceScrim")].forEach(sc=>sc.addEventListener("click",e=>{if(e.target===sc){sc.hidden=true;pendingCode=null}}));
 
 /* ---------- izvoz ---------- */
-const HEAD=["Šifra","EAN / barkod","Naziv","Stanje","Popisano","Razlika","Cena","Vrednost razlike","Napomena"];
-function tableRows(){
-  return S.items.map(i=>{
-    const c=S.counts[i.s],d=c===undefined?"":c-i.b;
-    return [i.s,(eans[i.s]||[]).join(", "),i.n,i.b,c===undefined?"":c,d,i.c||"",d===""?"":d*(i.c||0),i.a?"dodato u popisu":(c===undefined?"nije prebrojano":"")];
+const HEAD=["Šifra","EAN / barkod","Naziv","Stanje","Popisano","Razlika","Cena (RSD)","Vrednost stanja","Vrednost popisano","Vrednost razlike","Napomena"];
+/* Excel sa formulama: Razlika, vrednosti i zbir se računaju u samom fajlu */
+function makeSheet(){
+  const n=S.items.length,rows=[HEAD];
+  S.items.forEach((i,k)=>{
+    const r=k+2,c=S.counts[i.s];
+    rows.push([i.s,(eans[i.s]||[]).join(", "),i.n,i.b,c===undefined?"":c,null,i.c||0,null,null,null,i.a?"dodato u popisu":(c===undefined?"nije prebrojano":"")]);
   });
+  const ws=XLSX.utils.aoa_to_sheet(rows);
+  S.items.forEach((i,k)=>{
+    const r=k+2;
+    ws["F"+r]={t:"n",f:`IF(E${r}="","",E${r}-D${r})`};
+    ws["H"+r]={t:"n",f:`D${r}*G${r}`};
+    ws["I"+r]={t:"n",f:`IF(E${r}="","",E${r}*G${r})`};
+    ws["J"+r]={t:"n",f:`IF(E${r}="","",F${r}*G${r})`};
+    ws["G"+r].z=ws["H"+r].z=ws["I"+r].z=ws["J"+r].z="#,##0";
+  });
+  const tr=n+2,last=n+1;
+  const put=(c,v,f)=>{ws[c+tr]=f?{t:"n",f,z:"#,##0"}:{t:"s",v}};
+  put("C","UKUPNO");
+  for(const c of["D","E","F"])put(c,0,`SUM(${c}2:${c}${last})`);
+  for(const c of["H","I","J"])put(c,0,`SUM(${c}2:${c}${last})`);
+  ws["!ref"]=`A1:K${tr}`;
+  ws["!cols"]=[{wch:9},{wch:16},{wch:52},{wch:8},{wch:10},{wch:9},{wch:11},{wch:15},{wch:17},{wch:16},{wch:20}];
+  ws["!freeze"]={xSplit:0,ySplit:1};ws["!autofilter"]={ref:`A1:K${last}`};
+  return ws;
+}
+function csvRows(){
+  return S.items.map(i=>{const c=S.counts[i.s],d=c===undefined?"":c-i.b,p=i.c||0;
+    return [i.s,(eans[i.s]||[]).join(", "),i.n,i.b,c===undefined?"":c,d,p,i.b*p,c===undefined?"":c*p,d===""?"":d*p,i.a?"dodato u popisu":(c===undefined?"nije prebrojano":"")]});
 }
 $("exportBtn").onclick=()=>{
   const stamp=new Date().toISOString().slice(0,10);
   let name,data,mime;
   if(window.XLSX){
-    const wb=XLSX.utils.book_new(),ws=XLSX.utils.aoa_to_sheet([HEAD,...tableRows()]);
-    ws["!cols"]=[{wch:9},{wch:16},{wch:52},{wch:8},{wch:10},{wch:9},{wch:9},{wch:16},{wch:20}];
+    const wb=XLSX.utils.book_new(),ws=makeSheet();
     XLSX.utils.book_append_sheet(wb,ws,"Popis");
     data=XLSX.write(wb,{type:"array",bookType:"xlsx"});name=`popis-studio5-${stamp}.xlsx`;mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
   }else{
     const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
-    data="\ufeff"+[HEAD,...tableRows()].map(r=>r.map(q).join(";")).join("\r\n");name=`popis-studio5-${stamp}.csv`;mime="text/csv";
+    data="\ufeff"+[HEAD,...csvRows()].map(r=>r.map(q).join(";")).join("\r\n");name=`popis-studio5-${stamp}.csv`;mime="text/csv";
   }
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:mime}));a.download=name;
   document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},5000);
