@@ -142,6 +142,9 @@ button.ean.arm{color:#c0392b}
 .scanpanel{position:absolute;left:0;right:0;bottom:0;background:var(--bg);border-radius:28px 28px 0 0;box-shadow:var(--out);padding:18px max(16px,env(safe-area-inset-left,0px)) calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px;align-items:stretch}
 .scanmsg{font-weight:700;text-align:center;min-height:46px;display:flex;flex-direction:column;justify-content:center;gap:2px;overflow-wrap:anywhere}
 .scanmsg small{font-weight:400;color:var(--muted)}
+.scanqty{display:flex;justify-content:center;align-items:center;gap:14px}
+.scanqty .qty{width:84px;height:48px;font-size:24px}
+.scanqty .sbtn{width:48px;height:48px}
 .scanrow{display:grid;grid-template-columns:1fr auto;gap:12px;max-width:560px;width:100%;margin:0 auto}
 body.scanning .toast{top:calc(16px + env(safe-area-inset-top,0px));bottom:auto}
 .toast{z-index:60}
@@ -209,6 +212,7 @@ body.scanning .toast{top:calc(16px + env(safe-area-inset-top,0px));bottom:auto}
   <div class="reticle" aria-hidden="true"></div>
   <div class="scanpanel">
     <div class="scanmsg" id="scanMsg" aria-live="polite">Usmeri kameru na barkod</div>
+    <div class="scanqty" id="scanQty" hidden><button class="sbtn" id="sqDec" aria-label="Smanji">−</button><input class="qty" id="sqVal" type="number" min="0" inputmode="numeric" pattern="[0-9]*" aria-label="Popisano komada"><button class="sbtn" id="sqInc" aria-label="Povećaj">+</button></div>
     <div class="scanrow"><button class="btn primary" id="scanDone">Gotovo</button><button class="btn" id="torchBtn" hidden>Lampa</button></div>
   </div>
 </div>
@@ -492,7 +496,7 @@ $("pq").addEventListener("input",e=>fillPick(e.target.value));
 $("pickList").addEventListener("click",e=>{
   const b=e.target.closest("button[data-s]");if(!b)return;
   S.codes[pendingCode]=b.dataset.s;reindex();const n=inc(b.dataset.s);
-  $("pickScrim").hidden=true;pendingCode=null;buzz();toast(byId.get(b.dataset.s).n+"  +1  →  "+n);renderList();if(scan.on){scan.count++;$("scanMsg").innerHTML=esc(byId.get(b.dataset.s).n)+"<small>+1 → "+n+" · skenirano "+scan.count+"</small>"}
+  $("pickScrim").hidden=true;pendingCode=null;buzz();toast(byId.get(b.dataset.s).n+"  +1  →  "+n);renderList();if(scan.on){scan.count++;scanCur(b.dataset.s)}
 });
 $("pickCancel").onclick=()=>{$("pickScrim").hidden=true;pendingCode=null};
 $("pickNew").onclick=()=>{const c=pendingCode;$("pickScrim").hidden=true;pendingCode=null;openAdd(c||"")};
@@ -570,7 +574,7 @@ async function openScanner(mode){
     h.set(Z.DecodeHintType.TRY_HARDER,true);
     scan.rd=new Z.MultiFormatReader();scan.rd.setHints(h);
   }
-  document.body.classList.add("scanning");$("scanOv").hidden=false;
+  document.body.classList.add("scanning");$("scanOv").hidden=false;scan.cur=null;$("scanQty").hidden=true;
   try{if(navigator.wakeLock)scan.wake=await navigator.wakeLock.request("screen")}catch(e){}
   scan.on=true;scanLoop();
 }
@@ -594,7 +598,7 @@ async function readFrame(){
 }
 async function scanLoop(){
   if(!scan.on)return;
-  const paused=!$("pickScrim").hidden||!$("addScrim").hidden;
+  const paused=!$("pickScrim").hidden||!$("addScrim").hidden||document.activeElement===$("sqVal");
   if(paused)scan.wasPaused=true;
   else{
     if(scan.wasPaused){scan.wasPaused=false;scan.seen=Date.now()}   // posle izbora artikla isti barkod pred kamerom se ne računa ponovo
@@ -612,9 +616,19 @@ function onScanned(code){
     toast("Barkod očitan: "+code);return;
   }
   const s=handleCode(code);
-  if(s){scan.count++;$("scanMsg").innerHTML=esc(byId.get(s).n)+"<small>+1 → "+S.counts[s]+" · skenirano "+scan.count+"</small>"}
+  if(s){scan.count++;scanCur(s)}
   else $("scanMsg").innerHTML="Novi barkod "+esc(code)+"<small>Izaberi artikal</small>";
 }
+function scanCur(s){
+  scan.cur=s;const it=byId.get(s);if(!it)return;
+  $("scanMsg").innerHTML=esc(it.n)+"<small>Popisano: "+S.counts[s]+" · skenirano "+scan.count+"</small>";
+  $("scanQty").hidden=false;$("sqVal").value=S.counts[s]===undefined?"":S.counts[s];
+}
+$("sqInc").onclick=()=>{if(scan.cur){inc(scan.cur);scanCur(scan.cur)}};
+$("sqDec").onclick=()=>{if(scan.cur){const c=S.counts[scan.cur];setQty(scan.cur,c===undefined?0:Math.max(0,c-1));scanCur(scan.cur)}};
+$("sqVal").addEventListener("change",()=>{if(!scan.cur)return;const v=$("sqVal").value.trim();setQty(scan.cur,v===""?null:Number(v));scanCur(scan.cur)});
+$("sqVal").addEventListener("keydown",e=>{if(e.key==="Enter")e.target.blur()});
+$("sqVal").addEventListener("focus",e=>e.target.select());
 $("scanDone").onclick=closeScanner;
 $("torchBtn").onclick=async e=>{
   const on=!$("torchBtn").dataset.on;$("torchBtn").dataset.on=on?"1":"";
