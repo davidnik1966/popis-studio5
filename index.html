@@ -94,6 +94,8 @@ ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;g
 .btn.danger{color:var(--bad)}
 .meta{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:4px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .ean{color:var(--accent);font-weight:700}
+button.ean{border:0;background:none;font:inherit;font-weight:700;padding:3px 5px;margin:-3px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button.ean.arm{color:#c0392b}
 .pricechip{font:inherit;font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;min-height:20px}
 .pricechip.none{color:var(--accent);font-weight:700;text-decoration:none}
 .cells{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:end;margin-top:12px}
@@ -388,9 +390,17 @@ async function flush(){
 function initDb(){}
 
 /* ---------- prikaz ---------- */
+let unlinkArm=null,unlinkT=null;
+function askUnlink(s){
+  if(unlinkArm!==s){unlinkArm=s;clearTimeout(unlinkT);unlinkT=setTimeout(()=>{unlinkArm=null;renderList()},3500);renderList();toast("Dodirni EAN ponovo da ukloniš barkod sa ovog artikla",3200);return}
+  clearTimeout(unlinkT);unlinkArm=null;
+  let n=0;for(const k of Object.keys(S.codes)){if(S.codes[k]===s){delete S.codes[k];n++}}
+  reindex();touch();renderList();
+  toast(n?"Barkod uklonjen. Sledeće skeniranje pita koji je artikal.":"Nema povezanog barkoda.",3200);
+}
 function rowHtml(i){
   const c=S.counts[i.s],st=stateOf(i),e=eans[i.s];
-  const ean=e&&e.length?`<span class="ean">EAN ${esc(e[0])}${e.length>1?" +"+(e.length-1):""}</span>`:"";
+  const ean=e&&e.length?`<button class="ean${unlinkArm===i.s?" arm":""}" data-a="unlink" aria-label="Ukloni barkod sa artikla">${unlinkArm===i.s?"Dodirni opet: ukloni barkod":"EAN "+esc(e[0])+(e.length>1?" +"+(e.length-1):"")+" ✕"}</button>`:"";
   return `<li class="row" data-s="${esc(i.s)}"><div class="top"><div class="nm">${esc(i.n)}</div><button class="del" data-a="del" aria-label="Obriši artikal zauvek"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg></button></div><div class="meta"><span>${esc(i.s)}</span>${ean}<button class="pricechip${i.c?"":" none"}" data-a="price" aria-label="Izmeni cenu">${i.c?fmtRsd(i.c):"+ cena"}</button></div>
   <div class="cells">
     <div class="cell"><span class="cl">Stanje</span><div class="box">${i.b}</div></div>
@@ -439,6 +449,7 @@ function inc(s,by=1){const c=S.counts[s];setQty(s,(c===undefined?0:c)+by);return
 $("list").addEventListener("click",e=>{
   const b=e.target.closest("[data-a]");if(!b)return;
   const s=b.closest(".row").dataset.s,c=S.counts[s];
+  if(b.dataset.a==="unlink"){askUnlink(s);return}
   if(b.dataset.a==="del"){askDelete(s);return}
   if(b.dataset.a==="price"){openPrice(s);return}
   if(b.dataset.a==="inc")inc(s);else setQty(s,c===undefined?0:Math.max(0,c-1));
